@@ -64,6 +64,7 @@
             <th>Unit Price ($)</th>
             <th>Quantity (pcs)</th>
             <th>Discount</th>
+            <th>Subtotal ($)</th>
         </thead>
         <tbody>
             <?php $i = 1; ?>
@@ -74,6 +75,9 @@
                     <td>{{ $order_detail->UnitPrice }}</td>
                     <td>{{ $order_detail->Quantity }}</td>
                     <td>{{ $order_detail->Discount }}</td>
+                    <td>
+                        {{ ($order_detail->UnitPrice * $order_detail->Quantity) }}
+                    </td>
                 </tr>
             @endforeach
         </tbody>

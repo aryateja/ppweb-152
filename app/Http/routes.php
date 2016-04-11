@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -12,6 +14,55 @@ Route::get('category', function() {
     $categories = DB::table('categories')->get();
 
     return view('kategori.index', compact('categories'));
+});
+
+// Menampilkan form untuk ubah data
+Route::get('category/{id}/edit', function($id) {
+    $category = DB::table('categories')->where('CategoryID', $id)->first();
+
+    return view('kategori.edit', compact('category'));
+});
+
+// Memproses edit data
+Route::patch('category/{id}', function($id, Request $request) {
+    DB::table('categories')
+        ->where('CategoryID', $id)
+        ->update([
+                'CategoryName'  => $request->input('CategoryName'),
+                'Description'   => $request->input('Description')
+            ]);
+
+    return redirect('category')->with('pesan_sukses', 'Data kategori berhasil diubah.');
+});
+
+// Menampilkan form untuk tambah data
+Route::get('category/create', function() {
+    return view('kategori.create');
+});
+
+// Memproses tambah data
+Route::post('category', function(Request $request) {
+    $id = DB::table('categories')->insertGetId([
+        'CategoryName'  => $request->input('CategoryName'), 
+        'Description'   => $request->input('Description')
+    ]);
+
+    if ($id > 0)
+    {
+        return redirect('category')->with('pesan_sukses', 'Data kategori baru berhasil disimpan.');
+    }
+});
+
+// Memproses hapus data
+Route::delete('/category/{id}', function($id) {
+    try {
+        DB::table('categories')->where('CategoryID', '=', $id)->delete();
+
+        return redirect('category')->with('pesan_sukses', 'Data kategori berhasil dihapus.');
+    }
+    catch(Exception $e) {
+        return redirect('category')->with('pesan_gagal', $e->getMessage());
+    }
 });
 
 

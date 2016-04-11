@@ -7,12 +7,14 @@
 
         <title>Northwind Laravel</title>
 
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/sticky-footer-navbar.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-theme.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/sticky-footer-navbar.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert2.min.css') }}">
 
         <style type="text/css">
             h1 { margin-bottom: 40px; }
+            label { cursor: hand; cursor: pointer; }
         </style>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -49,7 +51,15 @@
         </nav>
 
         <div class="container">
-            @yield('konten')    
+            @if (session('pesan_sukses'))
+                @include('_alert.success')
+            @endif
+
+            @if (session('pesan_gagal'))
+                @include('_alert.failed')
+            @endif
+
+            @yield('konten')
         </div>
 
         <footer class="footer">
@@ -58,8 +68,9 @@
             </div>
         </footer>
 
-        <script src="{{ asset('js/jquery.min.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('js/common.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/sweetalert2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/common.js') }}"></script>
     </body>
 </html>

@@ -7,7 +7,7 @@
         <li class="active">Detil Karyawan</li>
     </ol>
 
-    <h1>{{ $employee->TitleOfCourtesy }} {{ $employee->FirstName }} {{ $employee->LastName }}</h1>
+    <h1>{{ $employee->FirstName }} {{ $employee->LastName }}, {{ $employee->TitleOfCourtesy }}</h1>
 
     <dl class="dl-horizontal">
         <dt>Title</dt>
