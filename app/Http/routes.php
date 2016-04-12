@@ -16,6 +16,28 @@ Route::get('category', function() {
     return view('kategori.index', compact('categories'));
 });
 
+// Menampilkan form untuk tambah data
+Route::get('category/create', function() {
+    return view('kategori.create');
+});
+
+// Memproses tambah data
+Route::post('category', function(Request $request) {
+    try {
+        $id = DB::table('categories')->insertGetId([
+            'CategoryName'  => $request->input('CategoryName'), 
+            'Description'   => $request->input('Description')
+        ]);
+
+        if ($id > 0) {
+            return redirect('category')->with('pesan_sukses', 'Data kategori baru berhasil disimpan.');
+        }
+    } 
+    catch (Exception $e) {
+        return redirect('category')->with('pesan_gagal', $e->getMessage());
+    }
+});
+
 // Menampilkan form untuk ubah data
 Route::get('category/{id}/edit', function($id) {
     $category = DB::table('categories')->where('CategoryID', $id)->first();
@@ -23,7 +45,7 @@ Route::get('category/{id}/edit', function($id) {
     return view('kategori.edit', compact('category'));
 });
 
-// Memproses edit data
+// Memproses ubah data
 Route::patch('category/{id}', function($id, Request $request) {
     DB::table('categories')
         ->where('CategoryID', $id)
@@ -35,24 +57,6 @@ Route::patch('category/{id}', function($id, Request $request) {
     return redirect('category')->with('pesan_sukses', 'Data kategori berhasil diubah.');
 });
 
-// Menampilkan form untuk tambah data
-Route::get('category/create', function() {
-    return view('kategori.create');
-});
-
-// Memproses tambah data
-Route::post('category', function(Request $request) {
-    $id = DB::table('categories')->insertGetId([
-        'CategoryName'  => $request->input('CategoryName'), 
-        'Description'   => $request->input('Description')
-    ]);
-
-    if ($id > 0)
-    {
-        return redirect('category')->with('pesan_sukses', 'Data kategori baru berhasil disimpan.');
-    }
-});
-
 // Memproses hapus data
 Route::delete('/category/{id}', function($id) {
     try {
@@ -60,7 +64,7 @@ Route::delete('/category/{id}', function($id) {
 
         return redirect('category')->with('pesan_sukses', 'Data kategori berhasil dihapus.');
     }
-    catch(Exception $e) {
+    catch (Exception $e) {
         return redirect('category')->with('pesan_gagal', $e->getMessage());
     }
 });
@@ -86,6 +90,78 @@ Route::get('product/{id}/show', function($id) {
                     ->where('ProductID', $id)->first();
 
     return view('produk.show', compact('product'));
+});
+
+// Menampilkan form untuk tambah data
+Route::get('product/create', function() {
+    $categories = DB::table('categories')->get();
+    $suppliers  = DB::table('suppliers')->get();
+
+    return view('produk.create', compact('categories', 'suppliers'));
+});
+
+// Memproses tambah data
+Route::post('product', function(Request $request) {
+    try {
+        $id = DB::table('products')->insertGetId([
+            'ProductName'       => $request->input('ProductName'), 
+            'SupplierID'        => $request->input('SupplierID'),
+            'CategoryID'        => $request->input('CategoryID'),
+            'QuantityPerUnit'   => $request->input('QuantityPerUnit'), 
+            'UnitPrice'         => $request->input('UnitPrice'), 
+            'UnitsInStock'      => $request->input('UnitsInStock'), 
+            'UnitsOnOrder'      => $request->input('UnitsOnOrder'), 
+            'ReorderLevel'      => $request->input('ReorderLevel'), 
+            'Discontinued'      => $request->input('Discontinued') ? DB::raw(1) : DB::raw(0)
+        ]);
+
+        if ($id > 0) {
+            return redirect('product')->with('pesan_sukses', 'Data produk baru berhasil disimpan.');
+        }
+    } 
+    catch (Exception $e) {
+        return redirect('product/create')->with('pesan_gagal', $e->getMessage());
+    }
+});
+
+// Menampilkan form untuk ubah data
+Route::get('product/{id}/edit', function($id) {
+    $product    = DB::table('products')->where('ProductID', $id)->first();
+    $categories = DB::table('categories')->get();
+    $suppliers  = DB::table('suppliers')->get();
+
+    return view('produk.edit', compact('product', 'categories', 'suppliers'));
+});
+
+// Memproses ubah data
+Route::patch('product/{id}', function($id, Request $request) {
+    DB::table('products')
+        ->where('ProductID', $id)
+        ->update([
+                'ProductName'       => $request->input('ProductName'), 
+                'SupplierID'        => $request->input('SupplierID'),
+                'CategoryID'        => $request->input('CategoryID'),
+                'QuantityPerUnit'   => $request->input('QuantityPerUnit'), 
+                'UnitPrice'         => $request->input('UnitPrice'), 
+                'UnitsInStock'      => $request->input('UnitsInStock'), 
+                'UnitsOnOrder'      => $request->input('UnitsOnOrder'), 
+                'ReorderLevel'      => $request->input('ReorderLevel'), 
+                'Discontinued'      => $request->input('Discontinued') ? DB::raw(1) : DB::raw(0)
+            ]);
+
+    return redirect('product')->with('pesan_sukses', 'Data produk berhasil diubah.');
+});
+
+// Memproses hapus data
+Route::delete('/product/{id}', function($id) {
+    try {
+        DB::table('products')->where('ProductID', '=', $id)->delete();
+
+        return redirect('product')->with('pesan_sukses', 'Data produk berhasil dihapus.');
+    }
+    catch(Exception $e) {
+        return redirect('product')->with('pesan_gagal', $e->getMessage());
+    }
 });
 
 

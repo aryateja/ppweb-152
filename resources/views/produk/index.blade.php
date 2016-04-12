@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
 @section('konten')
-    <h1>Products</h1>
+    <h1>
+        Products
+        <a href="product/create" class="btn btn-primary">Add New</a>
+    </h1>
 
     <table class="table table-condensed table-hover">
         <thead>
@@ -28,13 +31,17 @@
                     <td>{{ $product->UnitsInStock }}</td>
                     <td>{{ $product->UnitPrice }}</td>
                     <td>
-                        <a class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
+                        <a href="/product/{{ $product->ProductID }}/edit" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a> 
 
-                        <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Hapus Data">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </a>
+                        <form method="POST" action="/product/{{ $product->ProductID }}" style="display: inline;">
+                            {{ method_field('DELETE') }}
+
+                            <button type="submit" class="btn btn-danger btn-xs delete-confirm" data-toggle="tooltip" title="Hapus Data">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
