@@ -19,30 +19,240 @@
     </section>
 
     <section class="main-content">
-      <h1>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h1>
+      <h2>
+<a id="pendahuluan" class="anchor" href="#pendahuluan" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pendahuluan</h2>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here <a href="https://guides.github.com/features/mastering-markdown/">using GitHub Flavored Markdown</a>, select a template crafted by a designer, and publish. After your page is generated, you can check out the new <code>gh-pages</code> branch locally. If you’re using GitHub Desktop, simply sync your repository and you’ll see the new branch.</p>
+<p>Halo semua, khususnya mahasiswa PPWeb 152 Stikom Surabaya.</p>
+
+<p>Selamat datang di <em>source code</em> contoh, sekaligus menjadi <strong>materi UTS</strong> kita nanti. <em>Source code</em> / materi ini berisi contoh <em>action</em> <strong>Create, Read, Update, Delete</strong> untuk entitas <strong>Categories</strong> dan <strong>Products</strong> saja.</p>
+
+<p>Berikutnya akan saya tuliskan 3 hal berikut:</p>
+
+<ul>
+<li>Instalasi Source Code </li>
+<li>Tentang UTS
+
+<ul>
+<li>Jadwal UTS</li>
+<li>Penilaian UTS</li>
+</ul>
+</li>
+<li>Live Demo </li>
+</ul>
 
 <h2>
-<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Designer Templates</h2>
+<a id="instalasi-source-code" class="anchor" href="#instalasi-source-code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Instalasi Source Code</h2>
 
-<p>We’ve crafted some handsome templates for you to use. Go ahead and click 'Continue to layouts' to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved.</p>
+<ol>
+<li>Klik tombol <code>Download .zip</code> besar di atas.</li>
+<li>Extract file zip tersebut.</li>
+<li>Buka <code>Command Line</code> atau <code>Git Bash</code> dari dalam folder hasil extract tadi.</li>
+<li>Jalankan perintah <code>composer install</code>, tunggu sampai selesai.</li>
+<li>Jalankan perintah <code>mv .env.example .env</code>, pastikan sekarang terdapat file <code>.env</code> di root aplikasi.</li>
+<li>Jalankan perintah <code>php artisan key:generate</code>, pastikan sekarang di dalam file <code>.env</code> bagian <code>APP_KEY</code>. terisi angka/huruf random.</li>
+<li>Di dalam file <code>.env</code>, ubah isian bagian <code>DB_DATABASE</code>, <code>DB_USERNAME</code>, dan <code>DB_PASSWORD</code> sesuai dengan keadaan sistem Anda.</li>
+<li>Jalankan perintah <code>php artisan config:cache</code>, pastikan berjalan sukses.</li>
+<li>Terakhir, jalankan perintah <code>php artisan serve</code> untuk menjalankan <em>web server</em> bawaan Laravel</li>
+<li>Buka <em>web browser</em> favorit Anda, arahkan ke alamat: <code>http://localhost:8000</code>
+</li>
+</ol>
+
+<h2>
+<a id="tentang-uts" class="anchor" href="#tentang-uts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tentang UTS</h2>
+
+<p>Secara singkat, UTS kita nanti adalah membuat <strong>Create, Read, Update, Delete</strong> untuk entitas:</p>
+
+<ol>
+<li>Customers</li>
+<li>Employees</li>
+<li>Shippers</li>
+<li>Suppliers</li>
+</ol>
+
+<p>Untuk entitas <strong>Orders</strong> dan <strong>Order Details</strong> kerjakan HANYA <strong>Read</strong> (index dan show) saja.</p>
 
 <h3>
-<a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creating pages manually</h3>
+<a id="jadwal-uts" class="anchor" href="#jadwal-uts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Jadwal UTS</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>Berikut adalah jadwal UTS kita.</p>
+
+<table>
+<thead>
+<tr>
+<th>Kelas</th>
+<th>Hari / Tanggal</th>
+<th>Jam</th>
+<th>Ruang</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td>Kamis / 21-Apr-2016</td>
+<td>08:00 - 10:00</td>
+<td><em>akan dikonfirmasi</em></td>
+</tr>
+<tr>
+<td>Q1</td>
+<td>Kamis / 21-Apr-2016</td>
+<td>10:00 - 12:00</td>
+<td><em>akan dikonfirmasi</em></td>
+</tr>
+<tr>
+<td>R1</td>
+<td>Kamis / 21-Apr-2016</td>
+<td>13:00 - 15:00</td>
+<td><em>akan dikonfirmasi</em></td>
+</tr>
+</tbody>
+</table>
+
+<p>Catatan:</p>
+
+<ol>
+<li>Perhatikan kelas Anda. Jangan sampai salah jadwal!</li>
+<li>Jika jadwal <em>crash</em> dengan yang lain, segera beritahu saya untuk penggantian jadwal</li>
+</ol>
 
 <h3>
-<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a id="penilaian-uts" class="anchor" href="#penilaian-uts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Penilaian UTS</h3>
 
-<p>You can <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/#mentioning-users-and-teams" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>Berikut adalah daftar cara penilaian UTS ini.</p>
 
-<h3>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support or Contact</h3>
+<table>
+<thead>
+<tr>
+<th>No.</th>
+<th>Entitas</th>
+<th>Komponen Nilai</th>
+<th>Nilai</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.</td>
+<td>Customers</td>
+<td>Create / Add New</td>
+<td>5</td>
+</tr>
+<tr>
+<td>2.</td>
+<td></td>
+<td>Read (index dan show)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>3.</td>
+<td></td>
+<td>Update / Edit</td>
+<td>5</td>
+</tr>
+<tr>
+<td>4.</td>
+<td></td>
+<td>Delete (+ confirmation)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>5.</td>
+<td>Employees</td>
+<td>Create / Add New</td>
+<td>5</td>
+</tr>
+<tr>
+<td>6.</td>
+<td></td>
+<td>Read (index dan show)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>7.</td>
+<td></td>
+<td>Update / Edit</td>
+<td>5</td>
+</tr>
+<tr>
+<td>8.</td>
+<td></td>
+<td>Delete (+ confirmation)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>9.</td>
+<td>Shippers</td>
+<td>Create / Add New</td>
+<td>5</td>
+</tr>
+<tr>
+<td>10.</td>
+<td></td>
+<td>Read (index saja)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>11.</td>
+<td></td>
+<td>Update / Edit</td>
+<td>5</td>
+</tr>
+<tr>
+<td>12.</td>
+<td></td>
+<td>Delete (+ confirmation)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>13.</td>
+<td>Suppliers</td>
+<td>Create / Add New</td>
+<td>5</td>
+</tr>
+<tr>
+<td>14.</td>
+<td></td>
+<td>Read (index dan show)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>15.</td>
+<td></td>
+<td>Update / Edit</td>
+<td>5</td>
+</tr>
+<tr>
+<td>16.</td>
+<td></td>
+<td>Delete (+ confirmation)</td>
+<td>5</td>
+</tr>
+<tr>
+<td>17.</td>
+<td>Tampilan rapi &amp; bagus</td>
+<td></td>
+<td>10</td>
+</tr>
+<tr>
+<td>18.</td>
+<td>Tidak ada <em>error / bug</em>
+</td>
+<td></td>
+<td>10</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><strong>TOTAL NILAI</strong></td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
 
-<p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
+<h2>
+<a id="live-demo" class="anchor" href="#live-demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Live Demo</h2>
+
+<p>Anda bisa melihat <em>live demo</em> dari <em>source code</em> ini di: <em>[under construction]</em></p>
+
+<p>Sementara <em>live demo</em> sedang diperbaiki, berikut adalah <em>screenshots</em> penampakan jika <em>source code</em> ini berhasil Anda install: <a href="http://1drv.ms/1NnHKal">http://1drv.ms/1NnHKal</a></p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/rkukuh/ppweb-152">PPWeb 152</a> is maintained by <a href="https://github.com/rkukuh">rkukuh</a>.</span>
