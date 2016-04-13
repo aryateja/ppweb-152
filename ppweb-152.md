@@ -16,7 +16,7 @@ Berikutnya akan saya tuliskan 3 hal berikut:
 
 1. Klik tombol <code>Download .zip</code> besar di atas.
 2. Extract file zip tersebut.
-3. Buka <code>Command Line</code> atau <code>Git Bash</code> dari dalam folder hasil extract tadi.
+3. Buka <code>Git Bash</code> dari dalam folder hasil extract tadi.
 4. Jalankan perintah <code>composer install</code>, tunggu sampai selesai.
 5. Jalankan perintah <code>mv .env.example .env</code>, pastikan sekarang terdapat file <code>.env</code> di root aplikasi.
 6. Jalankan perintah <code>php artisan key:generate</code>, pastikan sekarang di dalam file <code>.env</code> bagian <code>APP_KEY</code>. terisi angka/huruf random.
@@ -73,9 +73,12 @@ No. | Entitas | Komponen Nilai | Nilai
 14. |           | Read (index dan show) | 5
 15. |           | Update / Edit | 5
 16. |           | Delete (+ confirmation) | 5 
-17. | Tampilan rapi & bagus |           | 10
+17. | Orders | Read (index dan show)          | 5
+18. | Order Details | Read (boleh digabung dengan Orders)   | 5
 18. | Tidak ada *error / bug* |           | 10
     |           | __TOTAL NILAI__ | 100
+
+Catatan: __Products__ dan __Categories__ TIDAK dinilai
 
 ## Live Demo
 
