@@ -16,7 +16,7 @@ class VerifyCsrfToken extends BaseVerifier
         'product', 'product/*',
         'employee', 'employee/*',
         'supplier', 'supplier/*',
-        'customer', 'supplier/*',
+        'customer', 'customer/*',
         'shipper', 'shipper/*',
         'order', 'order/*'
     ];
