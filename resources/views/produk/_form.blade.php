@@ -18,12 +18,17 @@
 
 <div class="form-group">
     <label class="col-md-2 control-label" for="Supplier">Supplier</label>
-    <div class="col-md-3">
-        <select class="form-control" id="Supplier" name="SupplierID">
-            @foreach($suppliers as $supplier)
-                <option value="{{ $supplier->SupplierID }}" {{ isset($product) && ($supplier->SupplierID == $product->SupplierID) ? 'selected' : '' }}>PT. {{ $supplier->CompanyName }}</option>
-            @endforeach
-        </select>
+    <div class="col-md-4">
+        <div class="input-group">
+            <span class="input-group-addon">PT.</span>
+            <select class="form-control" id="Supplier" name="SupplierID">
+                @foreach($suppliers as $supplier)
+                    <option value="{{ $supplier->SupplierID }}" {{ isset($product) && ($supplier->SupplierID == $product->SupplierID) ? 'selected' : '' }}>
+                        {{ $supplier->CompanyName }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
     </div>
 </div>
 

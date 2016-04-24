@@ -94,8 +94,8 @@ Route::get('product/{id}/show', function($id) {
 
 // Menampilkan form untuk tambah data
 Route::get('product/create', function() {
-    $categories = DB::table('categories')->get();
-    $suppliers  = DB::table('suppliers')->get();
+    $categories = DB::table('categories')->orderBy('CategoryName', 'asc')->get();
+    $suppliers  = DB::table('suppliers')->orderBy('CompanyName', 'asc')->get();
 
     return view('produk.create', compact('categories', 'suppliers'));
 });
@@ -127,8 +127,8 @@ Route::post('product', function(Request $request) {
 // Menampilkan form untuk ubah data
 Route::get('product/{id}/edit', function($id) {
     $product    = DB::table('products')->where('ProductID', $id)->first();
-    $categories = DB::table('categories')->get();
-    $suppliers  = DB::table('suppliers')->get();
+    $categories = DB::table('categories')->orderBy('CategoryName', 'asc')->get();
+    $suppliers  = DB::table('suppliers')->orderBy('CompanyName', 'asc')->get();
 
     return view('produk.edit', compact('product', 'categories', 'suppliers'));
 });
@@ -180,6 +180,31 @@ Route::get('employee/{id}/show', function($id) {
     $employee = DB::table('employees')->where('EmployeeID', $id)->first();
 
     return view('karyawan.show', compact('employee'));
+});
+
+// Menampilkan form untuk tambah data
+Route::get('employee/create', function() {
+    return view('karyawan.create');
+});
+
+// Menampilkan form untuk ubah data
+Route::get('employee/{id}/edit', function($id) {
+    $employee  = DB::table('employees')->where('EmployeeID', $id)->first();
+    $employees = DB::table('employees')->get();
+
+    return view('karyawan.edit', compact('employee', 'employees'));
+});
+
+// Memproses hapus data
+Route::delete('/employee/{id}', function($id) {
+    try {
+        DB::table('employees')->where('EmployeeID', '=', $id)->delete();
+
+        return redirect('employee')->with('pesan_sukses', 'Data karyawan berhasil dihapus.');
+    }
+    catch(Exception $e) {
+        return redirect('employee')->with('pesan_gagal', $e->getMessage());
+    }
 });
 
 
