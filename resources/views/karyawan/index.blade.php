@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
 @section('konten')
-    <h1>Employees</h1>
+    <h1>
+        Employees
+        <a href="employee/create" class="btn btn-primary">Add New</a>
+    </h1>
 
     <table class="table table-condensed table-hover">
         <thead>
@@ -26,13 +29,17 @@
                     <td>{{ $employee->HomePhone }}</td>
                     <td>{{ $employee->Country }}</td>
                     <td>
-                        <a class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
+                        <a href="/employee/{{ $employee->EmployeeID }}/edit" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a> 
 
-                        <a class="btn btn-danger btn-xs" data-toggle="tooltip" title="Hapus Data">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </a>
+                        <form method="POST" action="/employee/{{ $employee->EmployeeID }}" style="display: inline;">
+                            {{ method_field('DELETE') }}
+
+                            <button type="submit" class="btn btn-danger btn-xs delete-confirm" data-toggle="tooltip" title="Hapus Data">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

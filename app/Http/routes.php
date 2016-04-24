@@ -184,13 +184,15 @@ Route::get('employee/{id}/show', function($id) {
 
 // Menampilkan form untuk tambah data
 Route::get('employee/create', function() {
-    return view('karyawan.create');
+    $employees = DB::table('employees')->orderBy('FirstName', 'asc')->get();
+
+    return view('karyawan.create', compact('employees'));
 });
 
 // Menampilkan form untuk ubah data
 Route::get('employee/{id}/edit', function($id) {
     $employee  = DB::table('employees')->where('EmployeeID', $id)->first();
-    $employees = DB::table('employees')->get();
+    $employees = DB::table('employees')->orderBy('FirstName', 'asc')->get();
 
     return view('karyawan.edit', compact('employee', 'employees'));
 });
