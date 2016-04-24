@@ -11,7 +11,7 @@ Route::get('/', function () {
 
 // Menampilkan semua data
 Route::get('category', function() {
-    $categories = DB::table('categories')->get();
+    $categories = DB::table('categories')->orderBy('CategoryName', 'asc')->get();
 
     return view('kategori.index', compact('categories'));
 });
@@ -77,6 +77,7 @@ Route::delete('/category/{id}', function($id) {
 Route::get('product', function() {
     $products = DB::table('products')
                     ->leftJoin('categories', 'categories.CategoryID', '=', 'products.CategoryID')
+                    ->orderBy('ProductName', 'asc')
                     ->get();
 
     return view('produk.index', compact('products'));
@@ -170,7 +171,7 @@ Route::delete('/product/{id}', function($id) {
 
 // Menampilkan semua data
 Route::get('employee', function() {
-    $employees = DB::table('employees')->get();
+    $employees = DB::table('employees')->orderBy('FirstName', 'asc')->get();
 
     return view('karyawan.index', compact('employees'));
 });
@@ -215,7 +216,7 @@ Route::delete('/employee/{id}', function($id) {
 
 // Menampilkan semua data
 Route::get('supplier', function() {
-    $suppliers = DB::table('suppliers')->get();
+    $suppliers = DB::table('suppliers')->orderBy('CompanyName', 'asc')->get();
 
     return view('pemasok.index', compact('suppliers'));
 });
@@ -233,7 +234,7 @@ Route::get('supplier/{id}/show', function($id) {
 
 // Menampilkan semua data
 Route::get('customer', function() {
-    $customers = DB::table('customers')->get();
+    $customers = DB::table('customers')->orderBy('CustomerID', 'asc')->get();
 
     return view('pelanggan.index', compact('customers'));
 });
@@ -251,7 +252,7 @@ Route::get('customer/{id}/show', function($id) {
 
 // Menampilkan semua data
 Route::get('shipper', function() {
-    $shippers = DB::table('shippers')->get();
+    $shippers = DB::table('shippers')->orderBy('CompanyName', 'asc')->get();
 
     return view('kurir.index', compact('shippers'));
 });
@@ -265,6 +266,7 @@ Route::get('order', function() {
     $orders = DB::table('orders')
                     ->leftJoin('employees', 'employees.EmployeeID', '=', 'orders.EmployeeID')
                     ->leftJoin('customers', 'customers.CustomerID', '=', 'orders.CustomerID')
+                    ->orderBy('OrderID', 'asc')
                     ->get();
 
     return view('pemesanan.index', compact('orders'));
