@@ -18,7 +18,7 @@
                 <tr>
                     <td><?php echo $i++; ?></td>
                     <td>
-                        <a href="supplier/{{ $supplier->SupplierID }}/show">
+                        <a href="supplier/{{ $supplier->SupplierID }}">
                             PT. {{ $supplier->CompanyName }}
                         </a>
                     </td>
