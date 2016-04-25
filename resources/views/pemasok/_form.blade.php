@@ -45,7 +45,7 @@
 
 <div class="form-group">
     <label class="col-md-2 control-label" for="PostalCode">Postal Code</label>
-    <div class="col-md-1">
+    <div class="col-md-2">
         <input type="text" class="form-control" id="PostalCode" name="PostalCode" value="{{ isset($supplier->PostalCode) ? $supplier->PostalCode : '' }}">
     </div>
 </div>
