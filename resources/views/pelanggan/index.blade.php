@@ -19,7 +19,7 @@
                 <tr>
                     <td><?php echo $i++; ?></td>
                     <td>
-                        <a href="customer/{{ $customer->CustomerID }}/show">
+                        <a href="customer/{{ $customer->CustomerID }}">
                             {{ $customer->CustomerID }}
                         </a>
                     </td>

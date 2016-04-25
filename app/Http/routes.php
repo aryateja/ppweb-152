@@ -10,24 +10,7 @@ Route::resource('category', 'CategoryController');
 Route::resource('product', 'ProductController');
 Route::resource('employee', 'EmployeeController');
 Route::resource('supplier', 'SupplierController');
-
-
-/************************************************************************************************/
-/****************************************** CUSTOMERS *******************************************/
-
-// Menampilkan semua data
-Route::get('customer', function() {
-    $customers = DB::table('customers')->orderBy('CustomerID', 'asc')->get();
-
-    return view('pelanggan.index', compact('customers'));
-});
-
-// Menampilkan detil data tertentu
-Route::get('customer/{id}/show', function($id) {
-    $customer = DB::table('customers')->where('CustomerID', $id)->first();
-
-    return view('pelanggan.show', compact('customer'));
-});
+Route::resource('customer', 'CustomerController');
 
 
 /************************************************************************************************/
