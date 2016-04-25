@@ -28,7 +28,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('pelanggan.create');
     }
 
     /**
@@ -63,7 +63,9 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = DB::table('customers')->where('CustomerID', $id)->first();
+
+        return view('pelanggan.edit', compact('customer'));
     }
 
     /**
