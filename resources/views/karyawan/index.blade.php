@@ -21,7 +21,7 @@
                 <tr>
                     <td><?php echo $i++; ?></td>
                     <td>
-                        <a href="employee/{{ $employee->EmployeeID }}/show">
+                        <a href="employee/{{ $employee->EmployeeID }}">
                             {{ $employee->FirstName }} {{ $employee->LastName }}, {{ $employee->TitleOfCourtesy }}
                         </a>
                     </td>
