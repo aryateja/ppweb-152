@@ -22,7 +22,7 @@
                 <tr>
                     <td><?php echo $i++; ?></td>
                     <td>
-                        <a href="product/{{ $product->ProductID }}/show">
+                        <a href="product/{{ $product->ProductID }}">
                             {{ $product->ProductName }}
                         </a>
                     </td>
