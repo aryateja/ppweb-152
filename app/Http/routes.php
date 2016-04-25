@@ -11,17 +11,7 @@ Route::resource('product', 'ProductController');
 Route::resource('employee', 'EmployeeController');
 Route::resource('supplier', 'SupplierController');
 Route::resource('customer', 'CustomerController');
-
-
-/************************************************************************************************/
-/****************************************** SHIPPERS ********************************************/
-
-// Menampilkan semua data
-Route::get('shipper', function() {
-    $shippers = DB::table('shippers')->orderBy('CompanyName', 'asc')->get();
-
-    return view('kurir.index', compact('shippers'));
-});
+Route::resource('shipper', 'ShipperController');
 
 
 /************************************************************************************************/
