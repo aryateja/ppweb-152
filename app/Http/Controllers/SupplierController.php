@@ -28,7 +28,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('pemasok.create');
     }
 
     /**
@@ -63,7 +63,9 @@ class SupplierController extends Controller
      */
     public function edit($id)
     {
-        //
+        $supplier = DB::table('suppliers')->where('SupplierID', $id)->first();
+
+        return view('pemasok.edit', compact('supplier'));
     }
 
     /**
