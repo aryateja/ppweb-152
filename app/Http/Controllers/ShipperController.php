@@ -28,7 +28,7 @@ class ShipperController extends Controller
      */
     public function create()
     {
-        //
+        return view('kurir.create');
     }
 
     /**
@@ -39,7 +39,19 @@ class ShipperController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $id = DB::table('shippers')->insertGetId([
+                'CompanyName'   => $request->input('CompanyName'), 
+                'Phone'         => $request->input('Phone')
+            ]);
+
+            if ($id > 0) {
+                return redirect('shipper')->with('pesan_sukses', 'Data kurir baru berhasil disimpan.');
+            }
+        } 
+        catch (Exception $e) {
+            return redirect('shipper/create')->with('pesan_gagal', $e->getMessage());
+        }
     }
 
     /**
@@ -61,7 +73,9 @@ class ShipperController extends Controller
      */
     public function edit($id)
     {
-        //
+        $shipper = DB::table('shippers')->where('ShipperID', $id)->first();
+
+        return view('kurir.edit', compact('shipper'));
     }
 
     /**
@@ -73,7 +87,14 @@ class ShipperController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('shippers')
+            ->where('ShipperID', $id)
+            ->update([
+                    'CompanyName'   => $request->input('CompanyName'), 
+                    'Phone'         => $request->input('Phone')
+                ]);
+
+        return redirect('shipper')->with('pesan_sukses', 'Data kurir berhasil diubah.');
     }
 
     /**
@@ -84,6 +105,13 @@ class ShipperController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            DB::table('shippers')->where('ShipperID', '=', $id)->delete();
+
+            return redirect('shipper')->with('pesan_sukses', 'Data kurir berhasil dihapus.');
+        }
+        catch(Exception $e) {
+            return redirect('shipper')->with('pesan_gagal', $e->getMessage());
+        }
     }
 }
