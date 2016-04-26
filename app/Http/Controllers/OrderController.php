@@ -100,6 +100,13 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            DB::table('orders')->where('OrderID', '=', $id)->delete();
+
+            return redirect('order')->with('pesan_sukses', 'Data pemesanan berhasil dihapus.');
+        }
+        catch(Exception $e) {
+            return redirect('order')->with('pesan_gagal', $e->getMessage());
+        }
     }
 }
