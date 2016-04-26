@@ -41,11 +41,15 @@
         <dd>{{ $supplier->HomePage }}</dd>
     </dl>
 
-    <a class="btn btn-default">
+    <a href="/supplier/{{ $supplier->SupplierID }}/edit" class="btn btn-default" data-toggle="tooltip" title="Ubah Data">
         <span class="glyphicon glyphicon-pencil"></span> Ubah
     </a> 
 
-    <a class="btn btn-danger">
-        <span class="glyphicon glyphicon-trash"></span> Hapus
-    </a>
+    <form method="POST" action="/supplier/{{ $supplier->SupplierID }}" style="display: inline;">
+        {{ method_field('DELETE') }}
+
+        <button type="submit" class="btn btn-danger delete-confirm" data-toggle="tooltip" title="Hapus Data">
+            <span class="glyphicon glyphicon-trash"></span> Hapus
+        </button>
+    </form>
 @endsection
