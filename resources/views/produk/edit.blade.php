@@ -4,7 +4,7 @@
     <ol class="breadcrumb">
         <li><a href="/">Home</a></li>
         <li><a href="/product">Produk</a></li>
-        <li class="active">Ubah Product</li>
+        <li class="active">Ubah Produk</li>
     </ol>
 
     <h1>Produk ID: {{ $product->ProductID }}</h1>
