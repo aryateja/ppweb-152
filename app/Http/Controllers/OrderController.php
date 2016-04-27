@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 use DB;
 use App\Http\Requests;
@@ -105,7 +106,7 @@ class OrderController extends Controller
 
             return redirect('order')->with('pesan_sukses', 'Data pemesanan berhasil dihapus.');
         }
-        catch(Exception $e) {
+        catch(QueryException $e) {
             return redirect('order')->with('pesan_gagal', $e->getMessage());
         }
     }
