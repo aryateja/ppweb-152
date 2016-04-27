@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 use DB;
 use App\Http\Requests;
@@ -66,8 +67,8 @@ class EmployeeController extends Controller
                 return redirect('employee')->with('pesan_sukses', 'Data karyawan baru berhasil disimpan.');
             }
         } 
-        catch (Exception $e) {
-            return redirect('employee/create')->with('pesan_gagal', $e->getMessage());
+        catch (QueryException $e) {
+            return redirect('employee')->with('pesan_gagal', $e->getMessage());
         }
     }
 
@@ -107,29 +108,34 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('employees')
-            ->where('EmployeeID', $id)
-            ->update([
-                    'FirstName'         => $request->input('FirstName'),
-                    'LastName'          => $request->input('LastName'),
-                    'Title'             => $request->input('Title'),
-                    'TitleOfCourtesy'   => $request->input('TitleOfCourtesy'),
-                    'BirthDate'         => $request->input('BirthDate'),
-                    'HireDate'          => $request->input('HireDate'),
-                    'Address'           => $request->input('Address'),
-                    'City'              => $request->input('City'),
-                    'Region'            => $request->input('Region'),
-                    'PostalCode'        => $request->input('PostalCode'),
-                    'Country'           => $request->input('Country'),
-                    'HomePhone'         => $request->input('HomePhone'),
-                    'Extension'         => $request->input('Extension'),
-                    'Photo'             => $request->input('Photo'),
-                    'Notes'             => $request->input('Notes'),
-                    'ReportsTo'         => $request->input('ReportsTo'),
-                    'Salary'            => $request->input('Salary')
-                ]);
+        try {
+            DB::table('employees')
+                ->where('EmployeeID', $id)
+                ->update([
+                        'FirstName'         => $request->input('FirstName'),
+                        'LastName'          => $request->input('LastName'),
+                        'Title'             => $request->input('Title'),
+                        'TitleOfCourtesy'   => $request->input('TitleOfCourtesy'),
+                        'BirthDate'         => $request->input('BirthDate'),
+                        'HireDate'          => $request->input('HireDate'),
+                        'Address'           => $request->input('Address'),
+                        'City'              => $request->input('City'),
+                        'Region'            => $request->input('Region'),
+                        'PostalCode'        => $request->input('PostalCode'),
+                        'Country'           => $request->input('Country'),
+                        'HomePhone'         => $request->input('HomePhone'),
+                        'Extension'         => $request->input('Extension'),
+                        'Photo'             => $request->input('Photo'),
+                        'Notes'             => $request->input('Notes'),
+                        'ReportsTo'         => $request->input('ReportsTo'),
+                        'Salary'            => $request->input('Salary')
+                    ]);
 
-        return redirect('employee')->with('pesan_sukses', 'Data karyawan berhasil diubah.');
+            return redirect('employee')->with('pesan_sukses', 'Data karyawan berhasil diubah.');   
+        } 
+        catch (QueryException $e) {
+            return redirect('employee')->with('pesan_gagal', $e->getMessage());
+        }
     }
 
     /**
@@ -142,10 +148,10 @@ class EmployeeController extends Controller
     {
         try {
             DB::table('employees')->where('EmployeeID', '=', $id)->delete();
-
+            
             return redirect('employee')->with('pesan_sukses', 'Data karyawan berhasil dihapus.');
         }
-        catch(Exception $e) {
+        catch(QueryException $e) {
             return redirect('employee')->with('pesan_gagal', $e->getMessage());
         }
     }
