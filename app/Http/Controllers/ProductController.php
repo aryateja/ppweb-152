@@ -47,6 +47,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try {
+            $this->validate($request, [
+                'ProductName'   => 'required|unique:products|max:255',
+                'UnitPrice'     => 'required|numeric',
+                'UnitsInStock'  => 'required|numeric',
+                'UnitsOnOrder'  => 'required|numeric',
+                'ReorderLevel'  => 'required|numeric'
+            ]);
+
             $id = DB::table('products')->insertGetId([
                 'ProductName'       => $request->input('ProductName'), 
                 'SupplierID'        => $request->input('SupplierID'),
@@ -59,9 +67,7 @@ class ProductController extends Controller
                 'Discontinued'      => $request->input('Discontinued') ? DB::raw(1) : DB::raw(0)
             ]);
 
-            if ($id > 0) {
-                return redirect('product')->with('pesan_sukses', 'Data produk baru berhasil disimpan.');
-            }
+            return redirect('product')->with('pesan_sukses', 'Data produk baru berhasil disimpan.');
         } 
         catch (QueryException $e) {
             return redirect('product')->with('pesan_gagal', $e->getMessage());
@@ -109,6 +115,14 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $this->validate($request, [
+                'ProductName'   => 'required|unique:products,productname,'. $id .',productid|max:255',
+                'UnitPrice'     => 'required|numeric',
+                'UnitsInStock'  => 'required|numeric',
+                'UnitsOnOrder'  => 'required|numeric',
+                'ReorderLevel'  => 'required|numeric'
+            ]);
+
             DB::table('products')
                 ->where('ProductID', $id)
                 ->update([

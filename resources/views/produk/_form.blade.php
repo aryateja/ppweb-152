@@ -1,23 +1,27 @@
-<div class="form-group">
-    <label class="col-md-2 control-label" for="ProductName">Name</label>
+<div class="form-group {{ $errors->has('ProductName') ? 'has-error has-feedback' : '' }}">
+    <label class="col-md-2 control-label" for="ProductName">Name*</label>
     <div class="col-md-4">
-        <input type="text" class="form-control" id="ProductName" name="ProductName" value="{{ isset($product->ProductName) ? $product->ProductName : '' }}">
+        <input type="text" class="form-control" id="ProductName" name="ProductName" 
+                value="{{ isset($product->ProductName) ? $product->ProductName : old('ProductName') }}">
+        <?php echo $errors->first('ProductName', '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
     </div>
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="Category">Category</label>
+    <label class="col-md-2 control-label" for="Category">Category*</label>
     <div class="col-md-2">
         <select class="form-control" id="Category" name="CategoryID">
             @foreach($categories as $category)
-                <option value="{{ $category->CategoryID }}" {{ isset($product) && ($category->CategoryID == $product->CategoryID) ? 'selected' : '' }}>{{ $category->CategoryName }}</option>
+                <option value="{{ $category->CategoryID }}" {{ isset($product) && ($category->CategoryID == $product->CategoryID) ? 'selected' : '' }}>
+                    {{ $category->CategoryName }}
+                </option>
             @endforeach
         </select>
     </div>
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="Supplier">Supplier</label>
+    <label class="col-md-2 control-label" for="Supplier">Supplier*</label>
     <div class="col-md-4">
         <div class="input-group">
             <span class="input-group-addon">PT.</span>
@@ -32,53 +36,59 @@
     </div>
 </div>
 
-<div class="form-group">
+<div class="form-group {{ $errors->has('UnitPrice') ? 'has-error has-feedback' : '' }}">
     <label class="col-md-2 control-label" for="UnitPrice">Unit Price</label>
     <div class="col-md-2">
         <div class="input-group">
             <span class="input-group-addon">$</span>
-            <input type="text" class="form-control text-right" id="UnitPrice" name="UnitPrice" value="{{ isset($product->UnitPrice) ? $product->UnitPrice : 0 }}">
+            <input type="text" class="form-control text-right" id="UnitPrice" name="UnitPrice" 
+                    value="{{ isset($product->UnitPrice) ? $product->UnitPrice : (old('UnitPrice') ? old('UnitPrice') : 0) }}">
         </div>
+        <?php echo $errors->first('UnitPrice', '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label" for="QuantityPerUnit">Quantity Per Unit</label>
     <div class="col-md-2">
-        <div class="input-group">
-            <input type="text" class="form-control text-right" id="QuantityPerUnit" name="QuantityPerUnit" value="{{ isset($product->QuantityPerUnit) ? $product->QuantityPerUnit : 0 }}">
-            <span class="input-group-addon">pcs</span>
-        </div>
+        <input type="text" class="form-control text-right" id="QuantityPerUnit" name="QuantityPerUnit" 
+                value="{{ isset($product->QuantityPerUnit) ? $product->QuantityPerUnit : '' }}">
     </div>
 </div>
 
-<div class="form-group">
+<div class="form-group {{ $errors->has('UnitsInStock') ? 'has-error' : '' }}">
     <label class="col-md-2 control-label" for="UnitsInStock">Units In Stock</label>
     <div class="col-md-2">
         <div class="input-group">
-            <input type="text" class="form-control text-right" id="UnitsInStock" name="UnitsInStock" value="{{ isset($product->UnitsInStock) ? $product->UnitsInStock : 0 }}">
+            <input type="text" class="form-control text-right" id="UnitsInStock" name="UnitsInStock" 
+                    value="{{ isset($product->UnitsInStock) ? $product->UnitsInStock : (old('UnitsInStock') ? old('UnitsInStock') : 0) }}">
             <span class="input-group-addon">pcs</span>
         </div>
+        <?php echo $errors->first('UnitsInStock', '<span class="help-block">:message</span>'); ?>
     </div>
 </div>
 
-<div class="form-group">
+<div class="form-group {{ $errors->has('UnitsOnOrder') ? 'has-error' : '' }}">
     <label class="col-md-2 control-label" for="UnitsOnOrder">Units On Order</label>
     <div class="col-md-2">
         <div class="input-group">
-            <input type="text" class="form-control text-right" id="UnitsOnOrder" name="UnitsOnOrder" value="{{ isset($product->UnitsOnOrder) ? $product->UnitsOnOrder : 0 }}">
+            <input type="text" class="form-control text-right" id="UnitsOnOrder" name="UnitsOnOrder" 
+                    value="{{ isset($product->UnitsOnOrder) ? $product->UnitsOnOrder : (old('UnitsOnOrder') ? old('UnitsOnOrder') : 0) }}">
             <span class="input-group-addon">pcs</span>
         </div>
+        <?php echo $errors->first('UnitsOnOrder', '<span class="help-block">:message</span>'); ?>
     </div>
 </div>
 
-<div class="form-group">
+<div class="form-group {{ $errors->has('ReorderLevel') ? 'has-error' : '' }}">
     <label class="col-md-2 control-label" for="ReorderLevel">Reorder Level</label>
     <div class="col-md-2">
         <div class="input-group">
-            <input type="text" class="form-control text-right" id="ReorderLevel" name="ReorderLevel" value="{{ isset($product->ReorderLevel) ? $product->ReorderLevel : 0 }}">
+            <input type="text" class="form-control text-right" id="ReorderLevel" name="ReorderLevel" 
+                    value="{{ isset($product->ReorderLevel) ? $product->ReorderLevel : (old('ReorderLevel') ? old('ReorderLevel') : 0) }}">
             <span class="input-group-addon">pcs</span>
         </div>
+        <?php echo $errors->first('UnitsOnOrder', '<span class="help-block">:message</span>'); ?>
     </div>
 </div>
 
