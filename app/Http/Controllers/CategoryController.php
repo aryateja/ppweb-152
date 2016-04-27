@@ -41,14 +41,17 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         try {
-            $id = DB::table('categories')->insertGetId([
+            $this->validate($request, [
+                'CategoryName'  => 'required|unique:categories|alpha|max:50',
+                'Description'   => 'string'
+            ]);
+
+            $id = DB::table('categories')->insert([
                 'CategoryName'  => $request->input('CategoryName'), 
                 'Description'   => $request->input('Description')
             ]);
 
-            if ($id > 0) {
-                return redirect('category')->with('pesan_sukses', 'Data kategori baru berhasil disimpan.');
-            }
+            return redirect('category')->with('pesan_sukses', 'Data kategori baru berhasil disimpan.');
         } 
         catch (QueryException $e) {
             return redirect('category')->with('pesan_gagal', $e->getMessage());
@@ -89,6 +92,11 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $this->validate($request, [
+                'CategoryName'  => 'required|unique:categories,categoryname,'. $id .',categoryid|alpha|max:50',
+                'Description'   => 'string'
+            ]);
+
             DB::table('categories')
                 ->where('CategoryID', $id)
                 ->update([
