@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 use DB;
 use App\Http\Requests;
@@ -49,7 +50,7 @@ class CategoryController extends Controller
                 return redirect('category')->with('pesan_sukses', 'Data kategori baru berhasil disimpan.');
             }
         } 
-        catch (Exception $e) {
+        catch (QueryException $e) {
             return redirect('category')->with('pesan_gagal', $e->getMessage());
         }
     }
@@ -87,14 +88,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('categories')
-            ->where('CategoryID', $id)
-            ->update([
-                'CategoryName'  => $request->input('CategoryName'),
-                'Description'   => $request->input('Description')
-            ]);
+        try {
+            DB::table('categories')
+                ->where('CategoryID', $id)
+                ->update([
+                    'CategoryName'  => $request->input('CategoryName'),
+                    'Description'   => $request->input('Description')
+                ]);
 
-        return redirect('category')->with('pesan_sukses', 'Data kategori berhasil diubah.');
+            return redirect('category')->with('pesan_sukses', 'Data kategori berhasil diubah.');
+        } 
+        catch (QueryException $e) {
+            return redirect('category')->with('pesan_gagal', $e->getMessage());
+        }
     }
 
     /**
@@ -110,7 +116,7 @@ class CategoryController extends Controller
 
             return redirect('category')->with('pesan_sukses', 'Data kategori berhasil dihapus.');
         }
-        catch (Exception $e) {
+        catch (QueryException $e) {
             return redirect('category')->with('pesan_gagal', $e->getMessage());
         }
     }
