@@ -39,7 +39,28 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $id = DB::table('suppliers')->insertGetId([
+                'CompanyName'   => $request->input('CompanyName'), 
+                'ContactName'   => $request->input('ContactName'), 
+                'ContactTitle'  => $request->input('ContactTitle'), 
+                'Address'       => $request->input('Address'), 
+                'City'          => $request->input('City'), 
+                'Region'        => $request->input('Region'), 
+                'PostalCode'    => $request->input('PostalCode'), 
+                'Country'       => $request->input('Country'), 
+                'Phone'         => $request->input('Phone'), 
+                'Fax'           => $request->input('Fax'), 
+                'HomePage'      => $request->input('HomePage')
+            ]);
+
+            if ($id > 0) {
+                return redirect('supplier')->with('pesan_sukses', 'Data pemasok baru berhasil disimpan.');
+            }
+        } 
+        catch (QueryException $e) {
+            return redirect('supplier')->with('pesan_gagal', $e->getMessage());
+        }
     }
 
     /**
