@@ -128,6 +128,13 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            DB::table('customers')->where('CustomerID', '=', $id)->delete();
+
+            return redirect('customer')->with('pesan_sukses', 'Data pelanggan berhasil dihapus.');
+        }
+        catch(QueryException $e) {
+            return redirect('customer')->with('pesan_gagal', $e->getMessage());
+        }
     }
 }
