@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 use DB;
 use App\Http\Requests;
@@ -39,7 +40,26 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $id = DB::table('customers')->insert([
+                'CustomerID'    => $request->input('CustomerID'), 
+                'CompanyName'   => $request->input('CompanyName'), 
+                'ContactName'   => $request->input('ContactName'), 
+                'ContactTitle'  => $request->input('ContactTitle'), 
+                'Address'       => $request->input('Address'),
+                'City'          => $request->input('City'),
+                'Region'        => $request->input('Region'),
+                'PostalCode'    => $request->input('PostalCode'),
+                'Country'       => $request->input('Country'),
+                'Phone'         => $request->input('Phone'),
+                'Fax'           => $request->input('Fax'),
+            ]);
+
+            return redirect('customer')->with('pesan_sukses', 'Data pelanggan baru berhasil disimpan.');
+        } 
+        catch (QueryException $e) {
+            return redirect('customer')->with('pesan_gagal', $e->getMessage());
+        }
     }
 
     /**
