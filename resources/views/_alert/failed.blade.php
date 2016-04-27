@@ -4,15 +4,14 @@
     </button> 
 
     <strong>
-        <span class="glyphicon glyphicon-alert"></span> Error: 
+        <span class="glyphicon glyphicon-alert"></span> Error!  
     </strong> 
 
     @if (strpos(session('pesan_gagal'), '1451') !== false)
-        Data ini sudah dipakai dalam transaksi, sehingga tidak bisa dihapus.
+        Data ini sudah dipakai dalam transaksi, sehingga tidak bisa dihapus.<hr>
+
+        <p><em>{{ session('pesan_gagal') }}</em></p>
     @else
-        {{ session('pesan_gagal') }}
+        <p>{{ session('pesan_gagal') }}</p>
     @endif
-    
-    <hr>
-    <p><em>{{ session('pesan_gagal') }}</em></p>
 </div>
