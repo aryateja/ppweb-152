@@ -97,7 +97,27 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            DB::table('customers')
+                ->where('CustomerID', $id)
+                ->update([
+                        'CompanyName'   => $request->input('CompanyName'), 
+                        'ContactName'   => $request->input('ContactName'), 
+                        'ContactTitle'  => $request->input('ContactTitle'), 
+                        'Address'       => $request->input('Address'),
+                        'City'          => $request->input('City'),
+                        'Region'        => $request->input('Region'),
+                        'PostalCode'    => $request->input('PostalCode'),
+                        'Country'       => $request->input('Country'),
+                        'Phone'         => $request->input('Phone'),
+                        'Fax'           => $request->input('Fax'),
+                    ]);
+
+            return redirect('customer')->with('pesan_sukses', 'Data pelanggan berhasil diubah.');
+        } 
+        catch (QueryException $e) {
+            return redirect('customer')->with('pesan_gagal', $e->getMessage());
+        }
     }
 
     /**
