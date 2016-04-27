@@ -43,7 +43,7 @@ class EmployeeController extends Controller
     {
         try {
             $id = DB::table('employees')->insertGetId([
-                'FirstName'         => $request->input('LastName'),
+                'FirstName'         => $request->input('FirstName'),
                 'LastName'          => $request->input('LastName'),
                 'Title'             => $request->input('Title'),
                 'TitleOfCourtesy'   => $request->input('TitleOfCourtesy'),
