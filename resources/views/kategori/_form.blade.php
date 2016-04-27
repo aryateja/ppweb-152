@@ -1,7 +1,8 @@
 <div class="form-group {{ $errors->has('CategoryName') ? 'has-error has-feedback' : '' }}">
     <label class="col-md-1 control-label" for="CategoryName">Name*</label>
     <div class="col-md-4">
-        <input type="text" class="form-control" id="CategoryName" name="CategoryName" value="{{ isset($category->CategoryName) ? $category->CategoryName : old('CategoryName') }}">
+        <input type="text" class="form-control" id="CategoryName" name="CategoryName" 
+                value="{{ isset($category->CategoryName) ? $category->CategoryName : (old('CategoryName') ? old('CategoryName') : '') }}">
         <?php echo $errors->first('CategoryName', '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
     </div>
 </div>
