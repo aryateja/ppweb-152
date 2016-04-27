@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 use DB;
 use App\Http\Requests;
@@ -62,8 +63,8 @@ class ProductController extends Controller
                 return redirect('product')->with('pesan_sukses', 'Data produk baru berhasil disimpan.');
             }
         } 
-        catch (Exception $e) {
-            return redirect('product/create')->with('pesan_gagal', $e->getMessage());
+        catch (QueryException $e) {
+            return redirect('product')->with('pesan_gagal', $e->getMessage());
         }
     }
 
@@ -107,21 +108,26 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('products')
-            ->where('ProductID', $id)
-            ->update([
-                    'ProductName'       => $request->input('ProductName'), 
-                    'SupplierID'        => $request->input('SupplierID'),
-                    'CategoryID'        => $request->input('CategoryID'),
-                    'QuantityPerUnit'   => $request->input('QuantityPerUnit'), 
-                    'UnitPrice'         => $request->input('UnitPrice'), 
-                    'UnitsInStock'      => $request->input('UnitsInStock'), 
-                    'UnitsOnOrder'      => $request->input('UnitsOnOrder'), 
-                    'ReorderLevel'      => $request->input('ReorderLevel'), 
-                    'Discontinued'      => $request->input('Discontinued') ? DB::raw(1) : DB::raw(0)
-                ]);
+        try {
+            DB::table('products')
+                ->where('ProductID', $id)
+                ->update([
+                        'ProductName'       => $request->input('ProductName'), 
+                        'SupplierID'        => $request->input('SupplierID'),
+                        'CategoryID'        => $request->input('CategoryID'),
+                        'QuantityPerUnit'   => $request->input('QuantityPerUnit'), 
+                        'UnitPrice'         => $request->input('UnitPrice'), 
+                        'UnitsInStock'      => $request->input('UnitsInStock'), 
+                        'UnitsOnOrder'      => $request->input('UnitsOnOrder'), 
+                        'ReorderLevel'      => $request->input('ReorderLevel'), 
+                        'Discontinued'      => $request->input('Discontinued') ? DB::raw(1) : DB::raw(0)
+                    ]);
 
-        return redirect('product')->with('pesan_sukses', 'Data produk berhasil diubah.');
+            return redirect('product')->with('pesan_sukses', 'Data produk berhasil diubah.');
+        } 
+        catch (QueryException $e) {
+            return redirect('product')->with('pesan_gagal', $e->getMessage());
+        }
     }
 
     /**
@@ -137,7 +143,7 @@ class ProductController extends Controller
 
             return redirect('product')->with('pesan_sukses', 'Data produk berhasil dihapus.');
         }
-        catch(Exception $e) {
+        catch(QueryException $e) {
             return redirect('product')->with('pesan_gagal', $e->getMessage());
         }
     }
