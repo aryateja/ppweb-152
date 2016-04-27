@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 use DB;
 use App\Http\Requests;
@@ -130,6 +131,13 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            DB::table('suppliers')->where('SupplierID', '=', $id)->delete();
+
+            return redirect('supplier')->with('pesan_sukses', 'Data pemasok berhasil dihapus.');
+        }
+        catch(QueryException $e) {
+            return redirect('supplier')->with('pesan_gagal', $e->getMessage());
+        }
     }
 }
