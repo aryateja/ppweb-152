@@ -3,5 +3,9 @@
         <span aria-hidden="true">×</span>
     </button> 
 
-    <strong>Horee!</strong> {{ session('pesan_sukses') }} 
+    <strong>
+        <span class="glyphicon glyphicon-ok"></span> Sukses!
+    </strong> 
+
+    {{ session('pesan_sukses') }} 
 </div>

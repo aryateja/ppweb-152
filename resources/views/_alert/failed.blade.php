@@ -3,11 +3,16 @@
         <span aria-hidden="true">×</span>
     </button> 
 
-    <strong>Aaarrgghh!</strong> 
+    <strong>
+        <span class="glyphicon glyphicon-alert"></span> Error: 
+    </strong> 
 
     @if (strpos(session('pesan_gagal'), '1451') !== false)
         Data ini sudah dipakai dalam transaksi, sehingga tidak bisa dihapus.
     @else
         {{ session('pesan_gagal') }}
     @endif
+    
+    <hr>
+    <p><em>{{ session('pesan_gagal') }}</em></p>
 </div>
