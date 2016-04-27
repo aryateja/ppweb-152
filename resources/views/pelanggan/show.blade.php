@@ -10,6 +10,9 @@
     <h1>PT. {{ $customer->CompanyName }}</h1>
 
     <dl class="dl-horizontal">
+        <dt>Customer ID</dt>
+        <dd>{{ $customer->CustomerID }}</dd>
+
         <dt>Contact Person</dt>
         <dd>{{ $customer->ContactName }}</dd>
 
