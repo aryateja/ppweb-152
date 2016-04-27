@@ -1,3 +1,12 @@
+@if (strpos(URL::current(), 'create'))
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="CustomerID">Customer ID</label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" id="CustomerID" name="CustomerID">
+        </div>
+    </div>
+@endif
+
 <div class="form-group">
     <label class="col-md-2 control-label" for="CompanyName">Company Name</label>
     <div class="col-md-4">
