@@ -43,23 +43,23 @@ class EmployeeController extends Controller
     {
         try {
             $id = DB::table('employees')->insertGetId([
-                'FirstName' => $request->input('LastName'),
-                'LastName' => $request->input('LastName'),
-                'Title' => $request->input('Title'),
-                'TitleOfCourtesy' => $request->input('TitleOfCourtesy'),
-                'BirthDate' => $request->input('BirthDate'),
-                'HireDate' => $request->input('HireDate'),
-                'Address' => $request->input('Address'),
-                'City' => $request->input('City'),
-                'Region' => $request->input('Region'),
-                'PostalCode' => $request->input('PostalCode'),
-                'Country' => $request->input('Country'),
-                'HomePhone' => $request->input('HomePhone'),
-                'Extension' => $request->input('Extension'),
-                'Photo' => $request->input('Photo'),
-                'Notes' => $request->input('Notes'),
-                'ReportsTo' => $request->input('ReportsTo'),
-                'Salary' => $request->input('Salary')
+                'FirstName'         => $request->input('LastName'),
+                'LastName'          => $request->input('LastName'),
+                'Title'             => $request->input('Title'),
+                'TitleOfCourtesy'   => $request->input('TitleOfCourtesy'),
+                'BirthDate'         => $request->input('BirthDate'),
+                'HireDate'          => $request->input('HireDate'),
+                'Address'           => $request->input('Address'),
+                'City'              => $request->input('City'),
+                'Region'            => $request->input('Region'),
+                'PostalCode'        => $request->input('PostalCode'),
+                'Country'           => $request->input('Country'),
+                'HomePhone'         => $request->input('HomePhone'),
+                'Extension'         => $request->input('Extension'),
+                'Photo'             => $request->input('Photo'),
+                'Notes'             => $request->input('Notes'),
+                'ReportsTo'         => $request->input('ReportsTo'),
+                'Salary'            => $request->input('Salary')
             ]);
 
             if ($id > 0) {
