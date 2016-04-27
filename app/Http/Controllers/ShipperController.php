@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 use DB;
 use App\Http\Requests;
@@ -49,8 +50,8 @@ class ShipperController extends Controller
                 return redirect('shipper')->with('pesan_sukses', 'Data kurir baru berhasil disimpan.');
             }
         } 
-        catch (Exception $e) {
-            return redirect('shipper/create')->with('pesan_gagal', $e->getMessage());
+        catch (QueryException $e) {
+            return redirect('shipper')->with('pesan_gagal', $e->getMessage());
         }
     }
 
@@ -87,14 +88,19 @@ class ShipperController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('shippers')
-            ->where('ShipperID', $id)
-            ->update([
-                    'CompanyName'   => $request->input('CompanyName'), 
-                    'Phone'         => $request->input('Phone')
-                ]);
+        try {
+            DB::table('shippers')
+                ->where('ShipperID', $id)
+                ->update([
+                        'CompanyName'   => $request->input('CompanyName'), 
+                        'Phone'         => $request->input('Phone')
+                    ]);
 
-        return redirect('shipper')->with('pesan_sukses', 'Data kurir berhasil diubah.');
+            return redirect('shipper')->with('pesan_sukses', 'Data kurir berhasil diubah.');
+        } 
+        catch (QueryException $e) {
+            return redirect('shipper')->with('pesan_gagal', $e->getMessage());
+        }
     }
 
     /**
@@ -110,7 +116,7 @@ class ShipperController extends Controller
 
             return redirect('shipper')->with('pesan_sukses', 'Data kurir berhasil dihapus.');
         }
-        catch(Exception $e) {
+        catch(QueryException $e) {
             return redirect('shipper')->with('pesan_gagal', $e->getMessage());
         }
     }
