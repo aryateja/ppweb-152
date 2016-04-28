@@ -8,7 +8,7 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="Category">Category*</label>
+    <label class="col-md-2 control-label" for="Category">Category</label>
     <div class="col-md-2">
         <select class="form-control" id="Category" name="CategoryID">
             @foreach($categories as $category)
@@ -21,7 +21,7 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-2 control-label" for="Supplier">Supplier*</label>
+    <label class="col-md-2 control-label" for="Supplier">Supplier</label>
     <div class="col-md-4">
         <div class="input-group">
             <span class="input-group-addon">PT.</span>
