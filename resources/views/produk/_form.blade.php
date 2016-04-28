@@ -52,7 +52,7 @@
     <label class="col-md-2 control-label" for="QuantityPerUnit">Quantity Per Unit</label>
     <div class="col-md-2">
         <input type="text" class="form-control text-right" id="QuantityPerUnit" name="QuantityPerUnit" 
-                value="{{ isset($product->QuantityPerUnit) ? $product->QuantityPerUnit : '' }}">
+                value="{{ isset($product->QuantityPerUnit) ? $product->QuantityPerUnit : (old('QuantityPerUnit') ? old('QuantityPerUnit') : '') }}">
     </div>
 </div>
 
@@ -96,7 +96,9 @@
     <div class="col-md-offset-2 col-md-3">
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="Discontinued" {{ (isset($product->Discontinued) && ($product->Discontinued)) ? 'checked' : '' }}> Discontinued
+                <input type="checkbox" name="Discontinued" 
+                        {{ (isset($product->Discontinued) 
+                            && ($product->Discontinued)) ? 'checked' : (old('Discontinued') ? 'checked' : '') }}> Discontinued
             </label>
         </div>
     </div>
