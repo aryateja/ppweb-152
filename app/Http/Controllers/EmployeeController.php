@@ -116,6 +116,13 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $this->validate($request, [
+                'FirstName'     => 'required',
+                'BirthDate'     => 'required|date_format:Y-m-d',
+                'HireDate'      => 'required|date_format:Y-m-d H:i:s',
+                'Salary'        => 'required|numeric'
+            ]);
+            
             DB::table('employees')
                 ->where('EmployeeID', $id)
                 ->update([
