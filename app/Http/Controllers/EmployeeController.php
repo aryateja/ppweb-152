@@ -43,6 +43,13 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         try {
+            $this->validate($request, [
+                'FirstName'     => 'required',
+                'BirthDate'     => 'required|date_format:Y-m-d',
+                'HireDate'      => 'required|date_format:Y-m-d H:i:s',
+                'Salary'        => 'required|numeric'
+            ]);
+
             $id = DB::table('employees')->insertGetId([
                 'FirstName'         => $request->input('FirstName'),
                 'LastName'          => $request->input('LastName'),
