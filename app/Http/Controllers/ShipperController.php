@@ -41,6 +41,11 @@ class ShipperController extends Controller
     public function store(Request $request)
     {
         try {
+            $this->validate($request, [
+                'CompanyName'   => 'required',
+                'Phone'         => 'required'
+            ]);
+
             $id = DB::table('shippers')->insertGetId([
                 'CompanyName'   => $request->input('CompanyName'), 
                 'Phone'         => $request->input('Phone')
@@ -89,6 +94,11 @@ class ShipperController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $this->validate($request, [
+                'CompanyName'   => 'required',
+                'Phone'         => 'required'
+            ]);
+            
             DB::table('shippers')
                 ->where('ShipperID', $id)
                 ->update([
