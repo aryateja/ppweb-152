@@ -22,7 +22,7 @@
             <?php $i = 1; ?>
             @foreach($orders as $order)
                 <tr>
-                    <td><?php echo $i++; ?></td>
+                    <td><?php echo ($i++ + ($orders->currentPage() * $orders->perPage()) - $orders->perPage()); ?></td>
                     <td>
                         <a href="order/{{ $order->OrderID }}">
                             #{{ $order->OrderID }}
@@ -53,6 +53,8 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="pull-right">{!! $orders->links() !!}</div>
 
     <!-- Modal -->
     @foreach($employees as $employee)
