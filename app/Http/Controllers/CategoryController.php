@@ -43,7 +43,7 @@ class CategoryController extends Controller
         try {
             $this->validate($request, [
                 'CategoryName'  => 'required|unique:categories|alpha|max:50',
-                'Description'   => 'string'
+                'Description'   => 'required'
             ]);
 
             $id = DB::table('categories')->insert([
@@ -94,7 +94,7 @@ class CategoryController extends Controller
         try {
             $this->validate($request, [
                 'CategoryName'  => 'required|unique:categories,categoryname,'. $id .',categoryid|alpha|max:50',
-                'Description'   => 'string'
+                'Description'   => 'required'
             ]);
 
             DB::table('categories')
