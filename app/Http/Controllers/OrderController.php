@@ -17,12 +17,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders     = DB::table('orders')
-                          ->leftJoin('employees', 'employees.EmployeeID', '=', 'orders.EmployeeID')
-                          ->leftJoin('customers', 'customers.CustomerID', '=', 'orders.CustomerID')
-                          ->leftJoin('shippers', 'shippers.ShipperID', '=', 'orders.ShipVia')
-                          ->orderBy('OrderID', 'asc')
-                          ->paginate(10);
+        $orders = DB::table('orders')
+                        ->leftJoin('employees', 'employees.EmployeeID', '=', 'orders.EmployeeID')
+                        ->leftJoin('customers', 'customers.CustomerID', '=', 'orders.CustomerID')
+                        ->orderBy('OrderID', 'asc')
+                        ->paginate(10);
 
         $employees  = DB::table('employees')->get();
 
