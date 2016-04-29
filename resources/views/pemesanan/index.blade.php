@@ -8,13 +8,15 @@
 
     <table class="table table-condensed table-hover">
         <thead>
-            <th>No.</th>
-            <th>ID Pemesanan</th>
-            <th>ID Pelanggan</th>
-            <th>Tanggal Pesan</th>
-            <th>Tanggal Kirim</th>
-            <th>Disetujui Oleh</th>
-            <th></th>
+            <tr>
+                <th>No.</th>
+                <th>ID Pemesanan</th>
+                <th>ID Pelanggan</th>
+                <th>Tanggal Pesan</th>
+                <th>Tanggal Kirim</th>
+                <th>Disetujui Oleh</th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
             <?php $i = 1; ?>

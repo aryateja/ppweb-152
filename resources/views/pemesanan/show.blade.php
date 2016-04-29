@@ -59,13 +59,25 @@
 
     <table class="table table-condensed table-striped">
         <thead>
-            <th>No.</th>
-            <th>Product Name</th>
-            <th>Unit Price ($)</th>
-            <th>Quantity (pcs)</th>
-            <th>Discount</th>
-            <th>Subtotal ($)</th>
+            <tr>
+                <th>No.</th>
+                <th>Product Name</th>
+                <th>Unit Price ($)</th>
+                <th>Quantity (pcs)</th>
+                <th>Discount</th>
+                <th>Subtotal ($)</th>
+            </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{Total Qty}</td>
+                <td></td>
+                <td>{Grand Total}</td>
+            </tr>
+        </tfoot>
         <tbody>
             <?php $i = 1; ?>
             @foreach($order_details as $order_detail)

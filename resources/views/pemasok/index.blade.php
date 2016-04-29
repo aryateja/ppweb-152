@@ -8,12 +8,14 @@
 
     <table class="table table-condensed table-hover">
         <thead>
-            <th>No.</th>
-            <th>Nama Perusahaan</th>
-            <th>Contact Person</th>
-            <th>No. Telp</th>
-            <th>No. Fax</th>
-            <th></th>
+            <tr>
+                <th>No.</th>
+                <th>Nama Perusahaan</th>
+                <th>Contact Person</th>
+                <th>No. Telp</th>
+                <th>No. Fax</th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
             <?php $i = 1; ?>

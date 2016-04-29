@@ -8,13 +8,15 @@
 
     <table class="table table-condensed table-hover">
         <thead>
-            <th>No.</th>
-            <th>Nama</th>
-            <th>Kategori</th>
-            <th>Isi per Unit</th>
-            <th>Stok (pcs)</th>
-            <th>Harga ($)</th>
-            <th></th>
+            <tr>
+                <th>No.</th>
+                <th>Nama</th>
+                <th>Kategori</th>
+                <th>Isi per Unit</th>
+                <th>Stok (pcs)</th>
+                <th>Harga ($)</th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
             <?php $i = 1; ?>
