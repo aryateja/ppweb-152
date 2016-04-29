@@ -41,6 +41,12 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         try {
+            $this->validate($request, [
+                'CustomerID'    => 'required|alpha|size:5|unique:customers',
+                'CompanyName'   => 'required',
+                'Phone'         => 'required'
+            ]);
+
             $id = DB::table('customers')->insert([
                 'CustomerID'    => $request->input('CustomerID'), 
                 'CompanyName'   => $request->input('CompanyName'), 
@@ -98,6 +104,11 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $this->validate($request, [
+                'CompanyName'   => 'required',
+                'Phone'         => 'required'
+            ]);
+
             DB::table('customers')
                 ->where('CustomerID', $id)
                 ->update([

@@ -1,82 +1,101 @@
 @if (strpos(URL::current(), 'create'))
-    <div class="form-group">
-        <label class="col-md-2 control-label" for="CustomerID">Customer ID</label>
+    <div class="form-group {{ $errors->has('CustomerID') ? 'has-error has-feedback' : '' }}">
+        <label class="col-md-2 control-label" for="CustomerID">Customer ID*</label>
         <div class="col-md-4">
-            <input type="text" class="form-control" id="CustomerID" name="CustomerID">
+            <input type="text" class="form-control" id="CustomerID" name="CustomerID" 
+                    value="{{ old('CustomerID') }}">
+
+            <?php echo $errors->first('CustomerID', 
+                                      '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
         </div>
     </div>
 @endif
 
-<div class="form-group">
-    <label class="col-md-2 control-label" for="CompanyName">Company Name</label>
+<div class="form-group {{ $errors->has('CompanyName') ? 'has-error has-feedback' : '' }}">
+    <label class="col-md-2 control-label" for="CompanyName">Company Name*</label>
     <div class="col-md-4">
         <div class="input-group">
             <div class="input-group-addon">PT.</div>
-            <input type="text" class="form-control" id="CompanyName" name="CompanyName" value="{{ isset($customer->CompanyName) ? $customer->CompanyName : '' }}">
+            <input type="text" class="form-control" id="CompanyName" name="CompanyName" 
+                    value="{{ old('CompanyName') ? old('CompanyName') : (isset($customer->CompanyName) ? $customer->CompanyName : '') }}">
         </div>
+
+        <?php echo $errors->first('CompanyName', 
+                                  '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label" for="ContactName">Contact Name</label>
     <div class="col-md-4">
-        <input type="text" class="form-control" id="ContactName" name="ContactName" value="{{ isset($customer->ContactName) ? $customer->ContactName : '' }}">
+        <input type="text" class="form-control" id="ContactName" name="ContactName" 
+                value="{{ old('ContactName') ? old('ContactName') : (isset($customer->ContactName) ? $customer->ContactName : '') }}">
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label" for="ContactTitle">Contact Title</label>
     <div class="col-md-3">
-        <input type="text" class="form-control" id="ContactTitle" name="ContactTitle" value="{{ isset($customer->ContactTitle) ? $customer->ContactTitle : '' }}">
+        <input type="text" class="form-control" id="ContactTitle" name="ContactTitle" 
+                value="{{ old('ContactTitle') ? old('ContactTitle') : (isset($customer->ContactTitle) ? $customer->ContactTitle : '') }}">
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label" for="Address">Address</label>
     <div class="col-md-4">
-        <textarea class="form-control" id="Address" name="Address">{{ isset($customer->Address) ? $customer->Address : '' }}</textarea>
+        <textarea class="form-control" id="Address" name="Address">{{ old('Address') ? old('Address') : (isset($customer->Address) ? $customer->Address : '') }}</textarea>
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label" for="City">City</label>
     <div class="col-md-2">
-        <input type="text" class="form-control" id="City" name="City" value="{{ isset($customer->City) ? $customer->City : '' }}">
+        <input type="text" class="form-control" id="City" name="City" 
+                value="{{ old('City') ? old('City') : (isset($customer->City) ? $customer->City : '') }}">
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label" for="Region">Region</label>
     <div class="col-md-1">
-        <input type="text" class="form-control" id="Region" name="Region" value="{{ isset($customer->Region) ? $customer->Region : '' }}">
+        <input type="text" class="form-control" id="Region" name="Region" 
+                value="{{ old('Region') ? old('Region') : (isset($customer->Region) ? $customer->Region : '') }}">
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label" for="PostalCode">Postal Code</label>
     <div class="col-md-2">
-        <input type="text" class="form-control" id="PostalCode" name="PostalCode" value="{{ isset($customer->PostalCode) ? $customer->PostalCode : '' }}">
+        <input type="text" class="form-control" id="PostalCode" name="PostalCode" 
+                value="{{ old('PostalCode') ? old('PostalCode') : (isset($customer->PostalCode) ? $customer->PostalCode : '') }}">
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label" for="Country">Country</label>
     <div class="col-md-2">
-        <input type="text" class="form-control" id="Country" name="Country" value="{{ isset($customer->Country) ? $customer->Country : '' }}">
+        <input type="text" class="form-control" id="Country" name="Country" 
+                value="{{ old('Country') ? old('Country') : (isset($customer->Country) ? $customer->Country : '') }}">
     </div>
 </div>
 
-<div class="form-group">
-    <label class="col-md-2 control-label" for="Phone">Phone</label>
+<div class="form-group {{ $errors->has('Phone') ? 'has-error has-feedback' : '' }}">
+    <label class="col-md-2 control-label" for="Phone">Phone*</label>
     <div class="col-md-2">
-        <input type="text" class="form-control" id="Phone" name="Phone" value="{{ isset($customer->Phone) ? $customer->Phone : '' }}">
+        <input type="text" class="form-control" id="Phone" name="Phone" 
+                value="{{ old('Phone') ? old('Phone') : (isset($customer->Phone) ? $customer->Phone : '') }}">
+
+        <?php echo $errors->first('Phone', 
+                                  '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
     </div>
 </div>
 
 <div class="form-group">
     <label class="col-md-2 control-label" for="Fax">Fax</label>
     <div class="col-md-2">
-        <input type="text" class="form-control" id="Fax" name="Fax" value="{{ isset($customer->Fax) ? $customer->Fax : '' }}">
+        <input type="text" class="form-control" id="Fax" name="Fax" 
+                value="{{ old('Fax') ? old('Fax') : (isset($customer->Fax) ? $customer->Fax : '') }}">
     </div>
 </div>
 
