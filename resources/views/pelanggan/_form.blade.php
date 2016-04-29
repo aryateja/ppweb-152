@@ -80,14 +80,13 @@
     </div>
 </div>
 
-<div class="form-group {{ $errors->has('Phone') ? 'has-error has-feedback' : '' }}">
+<div class="form-group {{ $errors->has('Phone') ? 'has-error' : '' }}">
     <label class="col-md-2 control-label" for="Phone">Phone*</label>
     <div class="col-md-2">
         <input type="text" class="form-control" id="Phone" name="Phone" 
                 value="{{ old('Phone') ? old('Phone') : (isset($customer->Phone) ? $customer->Phone : '') }}">
 
-        <?php echo $errors->first('Phone', 
-                                  '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
+        <?php echo $errors->first('Phone', '<span class="help-block">:message</span>'); ?>
     </div>
 </div>
 

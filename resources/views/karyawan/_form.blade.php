@@ -35,25 +35,23 @@
             </div>
         </div>
 
-        <div class="form-group {{ $errors->has('BirthDate') ? 'has-error has-feedback' : '' }}">
+        <div class="form-group {{ $errors->has('BirthDate') ? 'has-error' : '' }}">
             <label class="col-md-3 control-label" for="BirthDate">Birth Date</label>
             <div class="col-md-4">
                 <input type="text" class="form-control" id="BirthDate" name="BirthDate" 
                         value="{{ old('BirthDate') ? old('BirthDate') : (isset($employee->BirthDate) ? $employee->BirthDate : '1900-01-01') }}">
 
-                <?php echo $errors->first('BirthDate', 
-                                          '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
+                <?php echo $errors->first('BirthDate', '<span class="help-block">:message</span>'); ?>
             </div>
         </div>
 
-        <div class="form-group {{ $errors->has('HireDate') ? 'has-error has-feedback' : '' }}">
+        <div class="form-group {{ $errors->has('HireDate') ? 'has-error' : '' }}">
             <label class="col-md-3 control-label" for="HireDate">Hire Date</label>
             <div class="col-md-4">
                 <input type="text" class="form-control" id="HireDate" name="HireDate" 
                         value="{{ old('HireDate') ? old('HireDate') : (isset($employee->HireDate) ? $employee->HireDate : Carbon\Carbon::now()) }}">
 
-                <?php echo $errors->first('HireDate', 
-                                          '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
+                <?php echo $errors->first('HireDate', '<span class="help-block">:message</span>'); ?>
             </div>
         </div>
 
@@ -136,7 +134,7 @@
 
         <div class="form-group {{ $errors->has('Salary') ? 'has-error' : '' }}">
             <label class="col-md-3 control-label" for="Salary">Salary</label>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="input-group">
                     <div class="input-group-addon">$</div>
                     <input type="text" class="form-control text-right" id="Salary" name="Salary" 

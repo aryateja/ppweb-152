@@ -76,8 +76,7 @@
         <input type="text" class="form-control" id="Phone" name="Phone" 
                 value="{{ old('Phone') ? old('Phone') : (isset($supplier->Phone) ? $supplier->Phone : '') }}">
 
-        <?php echo $errors->first('Phone', 
-                                  '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
+        <?php echo $errors->first('Phone', '<span class="help-block">:message</span>'); ?>
     </div>
 </div>
 

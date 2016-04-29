@@ -40,7 +40,7 @@
     </div>
 </div>
 
-<div class="form-group {{ $errors->has('UnitPrice') ? 'has-error has-feedback' : '' }}">
+<div class="form-group {{ $errors->has('UnitPrice') ? 'has-error' : '' }}">
     <label class="col-md-2 control-label" for="UnitPrice">Unit Price</label>
     <div class="col-md-2">
         <div class="input-group">
@@ -48,9 +48,7 @@
             <input type="text" class="form-control text-right" id="UnitPrice" name="UnitPrice" 
                     value="{{ old('UnitPrice') ? old('UnitPrice') : (isset($product->UnitPrice) ? $product->UnitPrice : 0) }}">
         </div>
-
-        <?php echo $errors->first('UnitPrice', 
-                                  '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
+        <?php echo $errors->first('UnitPrice', '<span class="help-block">:message</span>'); ?>
     </div>
 </div>
 

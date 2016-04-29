@@ -8,7 +8,7 @@
 </div>
 
 <div class="form-group {{ $errors->has('Description') ? 'has-error has-feedback' : '' }}">
-    <label class="col-md-1 control-label" for="Description">Description</label>
+    <label class="col-md-1 control-label" for="Description">Description*</label>
     <div class="col-md-4">
         <textarea class="form-control" id="Description" name="Description">{{ old('Description') ? old('Description') : (isset($category->Description) ? $category->Description : '') }}</textarea>
         <?php echo $errors->first('Description', '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
