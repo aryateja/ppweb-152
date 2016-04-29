@@ -3,7 +3,9 @@
     <div class="col-md-4">
         <input type="text" class="form-control" id="ProductName" name="ProductName" 
                 value="{{ old('ProductName') ? old('ProductName') : (isset($product->ProductName) ? $product->ProductName : '') }}">
-        <?php echo $errors->first('ProductName', '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
+        
+        <?php echo $errors->first('ProductName', 
+                                  '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
     </div>
 </div>
 
@@ -46,7 +48,9 @@
             <input type="text" class="form-control text-right" id="UnitPrice" name="UnitPrice" 
                     value="{{ old('UnitPrice') ? old('UnitPrice') : (isset($product->UnitPrice) ? $product->UnitPrice : 0) }}">
         </div>
-        <?php echo $errors->first('UnitPrice', '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
+
+        <?php echo $errors->first('UnitPrice', 
+                                  '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
     </div>
 </div>
 
