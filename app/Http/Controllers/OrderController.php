@@ -23,7 +23,9 @@ class OrderController extends Controller
                       ->orderBy('OrderID', 'asc')
                       ->get();
 
-        return view('pemesanan.index', compact('orders'));
+        $employees = DB::table('employees')->get();
+
+        return view('pemesanan.index', compact('orders', 'employees'));
     }
 
     /**
