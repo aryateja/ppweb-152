@@ -6,6 +6,7 @@
             <input type="text" class="form-control" id="CompanyName" name="CompanyName" 
                     value="{{ old('CompanyName') ? old('CompanyName') : (isset($supplier->CompanyName) ? $supplier->CompanyName : '') }}">
         </div>
+        
         <?php echo $errors->first('CompanyName', 
                                   '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
     </div>
