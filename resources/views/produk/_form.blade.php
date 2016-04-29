@@ -2,7 +2,7 @@
     <label class="col-md-2 control-label" for="ProductName">Name*</label>
     <div class="col-md-4">
         <input type="text" class="form-control" id="ProductName" name="ProductName" 
-                value="{{ isset($product->ProductName) ? $product->ProductName : old('ProductName') }}">
+                value="{{ old('ProductName') ? old('ProductName') : (isset($product->ProductName) ? $product->ProductName : '') }}">
         <?php echo $errors->first('ProductName', '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
     </div>
 </div>
@@ -12,7 +12,8 @@
     <div class="col-md-2">
         <select class="form-control" id="Category" name="CategoryID">
             @foreach($categories as $category)
-                <option value="{{ $category->CategoryID }}" {{ isset($product) && ($category->CategoryID == $product->CategoryID) ? 'selected' : '' }}>
+                <option value="{{ $category->CategoryID }}" {{ isset($product) && 
+                                                                    ($category->CategoryID == (old('CategoryID') ? old('CategoryID') : $product->CategoryID)) ? 'selected' : '' }}>
                     {{ $category->CategoryName }}
                 </option>
             @endforeach
@@ -27,7 +28,8 @@
             <span class="input-group-addon">PT.</span>
             <select class="form-control" id="Supplier" name="SupplierID">
                 @foreach($suppliers as $supplier)
-                    <option value="{{ $supplier->SupplierID }}" {{ isset($product) && ($supplier->SupplierID == $product->SupplierID) ? 'selected' : '' }}>
+                    <option value="{{ $supplier->SupplierID }}" {{ isset($product) && 
+                                                                        ($supplier->SupplierID == (old('SupplierID') ? old('SupplierID') : $product->SupplierID)) ? 'selected' : '' }}>
                         {{ $supplier->CompanyName }}
                     </option>
                 @endforeach
@@ -42,7 +44,7 @@
         <div class="input-group">
             <span class="input-group-addon">$</span>
             <input type="text" class="form-control text-right" id="UnitPrice" name="UnitPrice" 
-                    value="{{ isset($product->UnitPrice) ? $product->UnitPrice : (old('UnitPrice') ? old('UnitPrice') : 0) }}">
+                    value="{{ old('UnitPrice') ? old('UnitPrice') : (isset($product->UnitPrice) ? $product->UnitPrice : 0) }}">
         </div>
         <?php echo $errors->first('UnitPrice', '<span class="glyphicon glyphicon-remove form-control-feedback"></span><span class="help-block">:message</span>'); ?>
     </div>
@@ -52,7 +54,7 @@
     <label class="col-md-2 control-label" for="QuantityPerUnit">Quantity Per Unit</label>
     <div class="col-md-2">
         <input type="text" class="form-control text-right" id="QuantityPerUnit" name="QuantityPerUnit" 
-                value="{{ isset($product->QuantityPerUnit) ? $product->QuantityPerUnit : (old('QuantityPerUnit') ? old('QuantityPerUnit') : '') }}">
+                value="{{ old('QuantityPerUnit') ? old('QuantityPerUnit') : (isset($product->QuantityPerUnit) ? $product->QuantityPerUnit : '') }}">
     </div>
 </div>
 
@@ -61,7 +63,7 @@
     <div class="col-md-2">
         <div class="input-group">
             <input type="text" class="form-control text-right" id="UnitsInStock" name="UnitsInStock" 
-                    value="{{ isset($product->UnitsInStock) ? $product->UnitsInStock : (old('UnitsInStock') ? old('UnitsInStock') : 0) }}">
+                    value="{{ old('UnitsInStock') ? old('UnitsInStock') : (isset($product->UnitsInStock) ? $product->UnitsInStock : 0) }}">
             <span class="input-group-addon">pcs</span>
         </div>
         <?php echo $errors->first('UnitsInStock', '<span class="help-block">:message</span>'); ?>
@@ -73,7 +75,7 @@
     <div class="col-md-2">
         <div class="input-group">
             <input type="text" class="form-control text-right" id="UnitsOnOrder" name="UnitsOnOrder" 
-                    value="{{ isset($product->UnitsOnOrder) ? $product->UnitsOnOrder : (old('UnitsOnOrder') ? old('UnitsOnOrder') : 0) }}">
+                    value="{{ old('UnitsOnOrder') ? old('UnitsOnOrder') : (isset($product->UnitsOnOrder) ? $product->UnitsOnOrder : 0) }}">
             <span class="input-group-addon">pcs</span>
         </div>
         <?php echo $errors->first('UnitsOnOrder', '<span class="help-block">:message</span>'); ?>
@@ -85,7 +87,7 @@
     <div class="col-md-2">
         <div class="input-group">
             <input type="text" class="form-control text-right" id="ReorderLevel" name="ReorderLevel" 
-                    value="{{ isset($product->ReorderLevel) ? $product->ReorderLevel : (old('ReorderLevel') ? old('ReorderLevel') : 0) }}">
+                    value="{{ old('ReorderLevel') ? old('ReorderLevel') : (isset($product->ReorderLevel) ? $product->ReorderLevel : 0) }}">
             <span class="input-group-addon">pcs</span>
         </div>
         <?php echo $errors->first('UnitsOnOrder', '<span class="help-block">:message</span>'); ?>
