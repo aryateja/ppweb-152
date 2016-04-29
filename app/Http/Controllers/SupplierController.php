@@ -41,6 +41,12 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         try {
+            $this->validate($request, [
+                'CompanyName'   => 'required',
+                'ContactName'   => 'required',
+                'Phone'         => 'required',
+            ]);
+
             $id = DB::table('suppliers')->insertGetId([
                 'CompanyName'   => $request->input('CompanyName'), 
                 'ContactName'   => $request->input('ContactName'), 
@@ -100,6 +106,12 @@ class SupplierController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $this->validate($request, [
+                'CompanyName'   => 'required',
+                'ContactName'   => 'required',
+                'Phone'         => 'required',
+            ]);
+            
             DB::table('suppliers')
                 ->where('SupplierID', $id)
                 ->update([
