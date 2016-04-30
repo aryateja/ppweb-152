@@ -22,7 +22,9 @@
             <?php $i = 1; ?>
             @foreach($customers as $customer)
                 <tr>
-                    <td><?php echo $i++; ?></td>
+                    <td>
+                        <?php echo ($i++ + ($customers->currentPage() * $customers->perPage()) - $customers->perPage()); ?>
+                    </td>
                     <td>
                         <a href="customer/{{ $customer->CustomerID }}">
                             {{ $customer->CustomerID }}
@@ -49,4 +51,6 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="pull-right">{!! $customers->links() !!}</div>
 @endsection
