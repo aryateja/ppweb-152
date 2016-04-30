@@ -19,7 +19,9 @@
             <?php $i = 1; ?>
             @foreach($categories as $category)
                 <tr>
-                    <td><?php echo $i++; ?></td>
+                    <td>
+                        <?php echo ($i++ + ($categories->currentPage() * $categories->perPage()) - $categories->perPage()); ?>
+                    </td>
                     <td>{{ $category->CategoryName }}</td>
                     <td>{{ $category->Description }}</td>
                     <td>
@@ -39,4 +41,6 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="pull-right">{!! $categories->links() !!}</div>
 @endsection

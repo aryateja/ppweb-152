@@ -17,7 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')->orderBy('CategoryName', 'asc')->get();
+        $categories = DB::table('categories')
+                        ->orderBy('CategoryName', 'asc')
+                        ->paginate(env('PAGINATE'));
 
         return view('kategori.index', compact('categories'));
     }
