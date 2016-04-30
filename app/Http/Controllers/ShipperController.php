@@ -17,7 +17,9 @@ class ShipperController extends Controller
      */
     public function index()
     {
-        $shippers = DB::table('shippers')->orderBy('CompanyName', 'asc')->get();
+        $shippers = DB::table('shippers')
+                        ->orderBy('CompanyName', 'asc')
+                        ->paginate(env('PAGINATE'));
 
         return view('kurir.index', compact('shippers'));
     }

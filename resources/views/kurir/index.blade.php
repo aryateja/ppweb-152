@@ -19,7 +19,9 @@
             <?php $i = 1; ?>
             @foreach($shippers as $shipper)
                 <tr>
-                    <td><?php echo $i++; ?></td>
+                    <td>
+                        <?php echo ($i++ + ($shippers->currentPage() * $shippers->perPage()) - $shippers->perPage()); ?>
+                    </td>
                     <td>{{ $shipper->CompanyName }}</td>
                     <td>{{ $shipper->Phone }}</td>
                     <td>
@@ -39,4 +41,6 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="pull-right">{!! $shippers->links() !!}</div>
 @endsection
