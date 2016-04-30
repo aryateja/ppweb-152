@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropPhotopathColumnOnEmployeesTable extends Migration
+class DropPhotopathOnEmployeesTable extends Migration
 {
     /**
      * Run the migrations.
