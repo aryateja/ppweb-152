@@ -20,7 +20,7 @@ class ProductController extends Controller
         $products = DB::table('products')
                         ->leftJoin('categories', 'categories.CategoryID', '=', 'products.CategoryID')
                         ->orderBy('ProductName', 'asc')
-                        ->get();
+                        ->paginate(env('PAGINATE'));
 
         return view('produk.index', compact('products'));
     }

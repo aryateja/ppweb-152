@@ -22,7 +22,9 @@
             <?php $i = 1; ?>
             @foreach($products as $product)
                 <tr>
-                    <td><?php echo $i++; ?></td>
+                    <td>
+                        <?php echo ($i++ + ($products->currentPage() * $products->perPage()) - $products->perPage()); ?>
+                    </td>
                     <td>
                         <a href="product/{{ $product->ProductID }}">
                             {{ $product->ProductName }}
@@ -49,4 +51,6 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="pull-right">{!! $products->links() !!}</div>
 @endsection
