@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 
 use DB;
+use DateTime;
 use App\Http\Requests;
 
 class CategoryController extends Controller
@@ -50,7 +51,9 @@ class CategoryController extends Controller
 
             $id = DB::table('categories')->insert([
                 'CategoryName'  => $request->input('CategoryName'), 
-                'Description'   => $request->input('Description')
+                'Description'   => $request->input('Description'),
+                'created_at'    => new DateTime(),
+                'updated_at'    => new DateTime()
             ]);
 
             return redirect('category')->with('pesan_sukses', 'Data kategori baru berhasil disimpan.');
@@ -103,7 +106,8 @@ class CategoryController extends Controller
                 ->where('CategoryID', $id)
                 ->update([
                     'CategoryName'  => $request->input('CategoryName'),
-                    'Description'   => $request->input('Description')
+                    'Description'   => $request->input('Description'),
+                    'updated_at'    => new DateTime()
                 ]);
 
             return redirect('category')->with('pesan_sukses', 'Data kategori berhasil diubah.');
