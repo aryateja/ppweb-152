@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifyHomepageColumnOnSuppliersTable extends Migration
+class ModifyHomepageOnSuppliersTable extends Migration
 {
     /**
      * Run the migrations.
