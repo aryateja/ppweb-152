@@ -21,7 +21,7 @@ class OrderController extends Controller
                         ->leftJoin('employees', 'employees.EmployeeID', '=', 'orders.EmployeeID')
                         ->leftJoin('customers', 'customers.CustomerID', '=', 'orders.CustomerID')
                         ->orderBy('OrderID', 'asc')
-                        ->paginate(10);
+                        ->paginate(env('PAGINATE'));
 
         $employees  = DB::table('employees')->get();
 
