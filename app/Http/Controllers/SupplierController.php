@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 
 use DB;
+use DateTime;
 use App\Http\Requests;
 
 class SupplierController extends Controller
@@ -60,7 +61,9 @@ class SupplierController extends Controller
                 'Country'       => $request->input('Country'), 
                 'Phone'         => $request->input('Phone'), 
                 'Fax'           => $request->input('Fax'), 
-                'HomePage'      => $request->input('HomePage')
+                'HomePage'      => $request->input('HomePage'),
+                'created_at'    => new DateTime(),
+                'updated_at'    => new DateTime()
             ]);
 
             if ($id > 0) {
@@ -127,7 +130,8 @@ class SupplierController extends Controller
                         'Country'       => $request->input('Country'), 
                         'Phone'         => $request->input('Phone'), 
                         'Fax'           => $request->input('Fax'), 
-                        'HomePage'      => $request->input('HomePage')
+                        'HomePage'      => $request->input('HomePage'),
+                        'updated_at'    => new DateTime()
                     ]);
 
             return redirect('supplier')->with('pesan_sukses', 'Data pemasok berhasil diubah.');
