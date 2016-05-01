@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 
 use DB;
+use DateTime;
 use App\Http\Requests;
 
 class ProductController extends Controller
@@ -64,7 +65,9 @@ class ProductController extends Controller
                 'UnitsInStock'      => $request->input('UnitsInStock'), 
                 'UnitsOnOrder'      => $request->input('UnitsOnOrder'), 
                 'ReorderLevel'      => $request->input('ReorderLevel'), 
-                'Discontinued'      => $request->input('Discontinued') ? DB::raw(1) : DB::raw(0)
+                'Discontinued'      => $request->input('Discontinued') ? DB::raw(1) : DB::raw(0),
+                'created_at'        => new DateTime(),
+                'updated_at'        => new DateTime()
             ]);
 
             return redirect('product')->with('pesan_sukses', 'Data produk baru berhasil disimpan.');
@@ -134,7 +137,8 @@ class ProductController extends Controller
                         'UnitsInStock'      => $request->input('UnitsInStock'), 
                         'UnitsOnOrder'      => $request->input('UnitsOnOrder'), 
                         'ReorderLevel'      => $request->input('ReorderLevel'), 
-                        'Discontinued'      => $request->input('Discontinued') ? DB::raw(1) : DB::raw(0)
+                        'Discontinued'      => $request->input('Discontinued') ? DB::raw(1) : DB::raw(0),
+                        'updated_at'        => new DateTime()
                     ]);
 
             return redirect('product')->with('pesan_sukses', 'Data produk berhasil diubah.');
