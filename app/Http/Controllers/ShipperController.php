@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 
 use DB;
+use DateTime;
 use App\Http\Requests;
 
 class ShipperController extends Controller
@@ -50,7 +51,9 @@ class ShipperController extends Controller
 
             $id = DB::table('shippers')->insertGetId([
                 'CompanyName'   => $request->input('CompanyName'), 
-                'Phone'         => $request->input('Phone')
+                'Phone'         => $request->input('Phone'),
+                'created_at'    => new DateTime(),
+                'updated_at'    => new DateTime
             ]);
 
             if ($id > 0) {
@@ -105,7 +108,8 @@ class ShipperController extends Controller
                 ->where('ShipperID', $id)
                 ->update([
                         'CompanyName'   => $request->input('CompanyName'), 
-                        'Phone'         => $request->input('Phone')
+                        'Phone'         => $request->input('Phone'),
+                        'updated_at'    => new DateTime
                     ]);
 
             return redirect('shipper')->with('pesan_sukses', 'Data kurir berhasil diubah.');
