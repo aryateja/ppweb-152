@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 
 use DB;
+use DateTime;
 use App\Http\Requests;
 
 class CustomerController extends Controller
@@ -61,6 +62,8 @@ class CustomerController extends Controller
                 'Country'       => $request->input('Country'),
                 'Phone'         => $request->input('Phone'),
                 'Fax'           => $request->input('Fax'),
+                'created_at'    => new DateTime(),
+                'updated_at'    => new DateTime()
             ]);
 
             return redirect('customer')->with('pesan_sukses', 'Data pelanggan baru berhasil disimpan.');
@@ -124,6 +127,7 @@ class CustomerController extends Controller
                         'Country'       => $request->input('Country'),
                         'Phone'         => $request->input('Phone'),
                         'Fax'           => $request->input('Fax'),
+                        'updated_at'    => new DateTime()
                     ]);
 
             return redirect('customer')->with('pesan_sukses', 'Data pelanggan berhasil diubah.');
