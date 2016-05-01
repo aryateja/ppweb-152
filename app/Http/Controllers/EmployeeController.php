@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 
 use DB;
+use DateTime;
 use App\Http\Requests;
 
 class EmployeeController extends Controller
@@ -69,7 +70,9 @@ class EmployeeController extends Controller
                 'Photo'             => $request->input('Photo'),
                 'Notes'             => $request->input('Notes'),
                 'ReportsTo'         => $request->input('ReportsTo'),
-                'Salary'            => $request->input('Salary')
+                'Salary'            => $request->input('Salary'),
+                'created_at'        => new DateTime(),
+                'updated_at'        => new DateTime()
             ]);
 
             if ($id > 0) {
@@ -144,7 +147,8 @@ class EmployeeController extends Controller
                         'Photo'             => $request->input('Photo'),
                         'Notes'             => $request->input('Notes'),
                         'ReportsTo'         => $request->input('ReportsTo'),
-                        'Salary'            => $request->input('Salary')
+                        'Salary'            => $request->input('Salary'), 
+                        'updated_at'        => new DateTime()
                     ]);
 
             return redirect('employee')->with('pesan_sukses', 'Data karyawan berhasil diubah.');   
