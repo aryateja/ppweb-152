@@ -1,5 +1,5 @@
 <div class="form-group {{ $errors->has('CompanyName') ? 'has-error has-feedback' : '' }}">
-    <label class="col-md-2 control-label" for="CompanyName">Company Name</label>
+    <label class="col-md-2 control-label" for="CompanyName">Company Name*</label>
     <div class="col-md-4">
         <div class="input-group">
             <span class="input-group-addon">PT.</span>
@@ -13,7 +13,7 @@
 </div>
 
 <div class="form-group {{ $errors->has('Phone') ? 'has-error' : '' }}">
-    <label class="col-md-2 control-label" for="Phone">Phone</label>
+    <label class="col-md-2 control-label" for="Phone">Phone*</label>
     <div class="col-md-2">
         <input type="text" class="form-control" id="Phone" name="Phone" 
                 value="{{ old('Phone') ? old('Phone') : (isset($shipper->Phone) ? $shipper->Phone : '') }}">
