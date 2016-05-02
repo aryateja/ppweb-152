@@ -16,6 +16,6 @@
 
         <p><em>{{ session('pesan_gagal') }}</em></p>
     @else
-        <p>{{ session('pesan_gagal') }}</p>
+        <p style="margin-top: 10px;">{{ session('pesan_gagal') }}</p>
     @endif
 </div>
