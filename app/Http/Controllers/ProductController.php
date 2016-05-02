@@ -133,9 +133,6 @@ class ProductController extends Controller
                 return redirect('product/' . $id . '/edit')->withErrors($validator)->withInput();
             }
 
-            // FIXME: 
-            // Unchecked checkbox is not included in the $request object
-            // This is happen only on UPDATE request
             Product::where('ProductID', $id)->update($request->except('_method'));
 
             return redirect('product')->with('pesan_sukses', 'Data produk berhasil diubah.');
