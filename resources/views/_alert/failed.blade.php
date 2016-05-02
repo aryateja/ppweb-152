@@ -11,6 +11,10 @@
         Data ini sudah dipakai dalam transaksi, sehingga tidak bisa dihapus.<hr>
 
         <p><em>{{ session('pesan_gagal') }}</em></p>
+    @elseif (strpos(session('pesan_gagal'), 'No query results for model') !== false)
+        Data yang dicari tidak ditemukan.<hr>
+
+        <p><em>{{ session('pesan_gagal') }}</em></p>
     @else
         <p>{{ session('pesan_gagal') }}</p>
     @endif
