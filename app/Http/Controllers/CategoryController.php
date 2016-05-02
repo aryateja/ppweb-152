@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Database\QueryException;
 
-use DB;
-use DateTime;
+use Validator;
+
+use App\Category;
 use App\Http\Requests;
 
 class CategoryController extends Controller
@@ -18,9 +18,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = DB::table('categories')
-                        ->orderBy('CategoryName', 'asc')
-                        ->paginate(env('PAGINATE'));
+        $categories = Category::orderBy('CategoryName', 'asc')
+                                ->paginate(env('PAGINATE'));
 
         return view('kategori.index', compact('categories'));
     }
@@ -44,21 +43,20 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         try {
-            $this->validate($request, [
+            $validator = Validator::make($request->all(), [
                 'CategoryName'  => 'required|unique:categories|alpha|max:50',
                 'Description'   => 'required'
             ]);
 
-            $id = DB::table('categories')->insert([
-                'CategoryName'  => $request->input('CategoryName'), 
-                'Description'   => $request->input('Description'),
-                'created_at'    => new DateTime(),
-                'updated_at'    => new DateTime()
-            ]);
+            if ($validator->fails()) {
+                return redirect('category/create')->withErrors($validator)->withInput();
+            }
+
+            Category::create($request->all());
 
             return redirect('category')->with('pesan_sukses', 'Data kategori baru berhasil disimpan.');
         } 
-        catch (QueryException $e) {
+        catch (\Exception $e) {
             return redirect('category')->with('pesan_gagal', $e->getMessage());
         }
     }
@@ -82,9 +80,14 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = DB::table('categories')->where('CategoryID', $id)->first();
+        try {
+            $category = Category::where('CategoryID', $id)->firstOrFail();
 
-        return view('kategori.edit', compact('category'));
+            return view('kategori.edit', compact('category'));
+        } 
+        catch (\Exception $e) {
+            return redirect('category')->with('pesan_gagal', $e->getMessage());
+        }
     }
 
     /**
@@ -97,22 +100,20 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $this->validate($request, [
+            $validator = Validator::make($request->all(), [
                 'CategoryName'  => 'required|unique:categories,categoryname,'. $id .',categoryid|alpha|max:50',
                 'Description'   => 'required'
             ]);
 
-            DB::table('categories')
-                ->where('CategoryID', $id)
-                ->update([
-                    'CategoryName'  => $request->input('CategoryName'),
-                    'Description'   => $request->input('Description'),
-                    'updated_at'    => new DateTime()
-                ]);
+            if ($validator->fails()) {
+                return redirect('category/' . $id . '/edit')->withErrors($validator)->withInput();
+            }
+
+            Category::where('CategoryID', $id)->update($request->except('_method'));
 
             return redirect('category')->with('pesan_sukses', 'Data kategori berhasil diubah.');
         } 
-        catch (QueryException $e) {
+        catch (\Exception $e) {
             return redirect('category')->with('pesan_gagal', $e->getMessage());
         }
     }
@@ -126,11 +127,11 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         try {
-            DB::table('categories')->where('CategoryID', '=', $id)->delete();
+            Category::where('CategoryID', '=', $id)->delete();
 
             return redirect('category')->with('pesan_sukses', 'Data kategori berhasil dihapus.');
         }
-        catch (QueryException $e) {
+        catch (\Exception $e) {
             return redirect('category')->with('pesan_gagal', $e->getMessage());
         }
     }
