@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Database\QueryException;
 
 use DB;
-use DateTime;
+use Validator;
+
+use App\Product;
+use App\Category;
 use App\Http\Requests;
 
 class ProductController extends Controller
@@ -18,10 +20,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = DB::table('products')
-                        ->leftJoin('categories', 'categories.CategoryID', '=', 'products.CategoryID')
-                        ->orderBy('ProductName', 'asc')
-                        ->paginate(env('PAGINATE'));
+        $products = Product::orderBy('ProductName', 'asc')
+                            ->leftJoin('categories', 'categories.CategoryID', '=', 'products.CategoryID')
+                            ->paginate(env('PAGINATE'));
 
         return view('produk.index', compact('products'));
     }
@@ -33,7 +34,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = DB::table('categories')->orderBy('CategoryName', 'asc')->get();
+        $categories = Category::orderBy('CategoryName', 'asc')->get();
         $suppliers  = DB::table('suppliers')->orderBy('CompanyName', 'asc')->get();
 
         return view('produk.create', compact('categories', 'suppliers'));
@@ -48,7 +49,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try {
-            $this->validate($request, [
+            $validator = Validator::make($request->all(), [
                 'ProductName'   => 'required|unique:products|max:255',
                 'UnitPrice'     => 'required|numeric',
                 'UnitsInStock'  => 'required|numeric',
@@ -56,23 +57,15 @@ class ProductController extends Controller
                 'ReorderLevel'  => 'required|numeric'
             ]);
 
-            $id = DB::table('products')->insertGetId([
-                'ProductName'       => $request->input('ProductName'), 
-                'SupplierID'        => $request->input('SupplierID'),
-                'CategoryID'        => $request->input('CategoryID'),
-                'QuantityPerUnit'   => $request->input('QuantityPerUnit'), 
-                'UnitPrice'         => $request->input('UnitPrice'), 
-                'UnitsInStock'      => $request->input('UnitsInStock'), 
-                'UnitsOnOrder'      => $request->input('UnitsOnOrder'), 
-                'ReorderLevel'      => $request->input('ReorderLevel'), 
-                'Discontinued'      => $request->input('Discontinued') ? DB::raw(1) : DB::raw(0),
-                'created_at'        => new DateTime(),
-                'updated_at'        => new DateTime()
-            ]);
+            if ($validator->fails()) {
+                return redirect('product/create')->withErrors($validator)->withInput();
+            }
+
+            Product::create($request->all());
 
             return redirect('product')->with('pesan_sukses', 'Data produk baru berhasil disimpan.');
         } 
-        catch (QueryException $e) {
+        catch (\Exception $e) {
             return redirect('product')->with('pesan_gagal', $e->getMessage());
         }
     }
@@ -85,12 +78,17 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = DB::table('products')
-                        ->leftJoin('categories', 'categories.CategoryID', '=', 'products.CategoryID')
-                        ->leftJoin('suppliers', 'suppliers.SupplierID', '=', 'products.SupplierID')
-                        ->where('ProductID', $id)->first();
-
-        return view('produk.show', compact('product'));
+        try {
+            $product = Product::where('ProductID', $id)
+                                ->leftJoin('categories', 'categories.CategoryID', '=', 'products.CategoryID')
+                                ->leftJoin('suppliers', 'suppliers.SupplierID', '=', 'suppliers.SupplierID')
+                                ->firstOrFail();
+        
+            return view('produk.show', compact('product'));
+        } 
+        catch (\Exception $e) {
+            return redirect('product')->with('pesan_gagal', $e->getMessage());
+        }
     }
 
     /**
@@ -101,11 +99,16 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product    = DB::table('products')->where('ProductID', $id)->first();
-        $categories = DB::table('categories')->orderBy('CategoryName', 'asc')->get();
-        $suppliers  = DB::table('suppliers')->orderBy('CompanyName', 'asc')->get();
+        try {
+            $product    = Product::where('ProductID', $id)->firstOrFail();
+            $categories = Category::orderBy('CategoryName', 'asc')->get();
+            $suppliers  = DB::table('suppliers')->orderBy('CompanyName', 'asc')->get();
 
-        return view('produk.edit', compact('product', 'categories', 'suppliers'));
+            return view('produk.edit', compact('product', 'categories', 'suppliers'));
+        } 
+        catch (\Exception $e) {
+            return redirect('product')->with('pesan_gagal', $e->getMessage());
+        }
     }
 
     /**
@@ -118,7 +121,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $this->validate($request, [
+            $validator = Validator::make($request->all(), [
                 'ProductName'   => 'required|unique:products,productname,'. $id .',productid|max:255',
                 'UnitPrice'     => 'required|numeric',
                 'UnitsInStock'  => 'required|numeric',
@@ -126,24 +129,18 @@ class ProductController extends Controller
                 'ReorderLevel'  => 'required|numeric'
             ]);
 
-            DB::table('products')
-                ->where('ProductID', $id)
-                ->update([
-                        'ProductName'       => $request->input('ProductName'), 
-                        'SupplierID'        => $request->input('SupplierID'),
-                        'CategoryID'        => $request->input('CategoryID'),
-                        'QuantityPerUnit'   => $request->input('QuantityPerUnit'), 
-                        'UnitPrice'         => $request->input('UnitPrice'), 
-                        'UnitsInStock'      => $request->input('UnitsInStock'), 
-                        'UnitsOnOrder'      => $request->input('UnitsOnOrder'), 
-                        'ReorderLevel'      => $request->input('ReorderLevel'), 
-                        'Discontinued'      => $request->input('Discontinued') ? DB::raw(1) : DB::raw(0),
-                        'updated_at'        => new DateTime()
-                    ]);
+            if ($validator->fails()) {
+                return redirect('product/' . $id . '/edit')->withErrors($validator)->withInput();
+            }
+
+            // FIXME: 
+            // Unchecked checkbox is not included in the $request object
+            // This is happen only on UPDATE request
+            Product::where('ProductID', $id)->update($request->except('_method'));
 
             return redirect('product')->with('pesan_sukses', 'Data produk berhasil diubah.');
         } 
-        catch (QueryException $e) {
+        catch (\Exception $e) {
             return redirect('product')->with('pesan_gagal', $e->getMessage());
         }
     }
@@ -157,11 +154,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         try {
-            DB::table('products')->where('ProductID', '=', $id)->delete();
+            Product::where('ProductID', '=', $id)->delete();
 
             return redirect('product')->with('pesan_sukses', 'Data produk berhasil dihapus.');
         }
-        catch(QueryException $e) {
+        catch(\Exception $e) {
             return redirect('product')->with('pesan_gagal', $e->getMessage());
         }
     }
