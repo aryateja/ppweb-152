@@ -10,6 +10,4 @@ class Category extends Model
         'CategoryName',
         'Description'
     ];
-
-    protected $guarded = ['_method'];
 }
