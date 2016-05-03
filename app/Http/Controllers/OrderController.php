@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Database\QueryException;
 
-use DB;
+use App\Order;
+use App\Employee;
+use App\OrderDetail;
 use App\Http\Requests;
 
 class OrderController extends Controller
@@ -17,13 +18,12 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = DB::table('orders')
-                        ->leftJoin('employees', 'employees.EmployeeID', '=', 'orders.EmployeeID')
+        $orders = Order::leftJoin('employees', 'employees.EmployeeID', '=', 'orders.EmployeeID')
                         ->leftJoin('customers', 'customers.CustomerID', '=', 'orders.CustomerID')
                         ->orderBy('OrderID', 'asc')
                         ->paginate(env('PAGINATE'));
 
-        $employees  = DB::table('employees')->get();
+        $employees  = Employee::all();
 
         return view('pemesanan.index', compact('orders', 'employees'));
     }
@@ -57,17 +57,15 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = DB::table('orders')
-                     ->leftJoin('employees', 'employees.EmployeeID', '=', 'orders.EmployeeID')
-                     ->leftJoin('customers', 'customers.CustomerID', '=', 'orders.CustomerID')
-                     // ->leftJoin('shippers', 'shippers.ShipperID', '=', 'orders.ShipVia')
-                     ->where('OrderID', $id)
-                     ->first();
+        $order = Order::leftJoin('employees', 'employees.EmployeeID', '=', 'orders.EmployeeID')
+                        ->leftJoin('customers', 'customers.CustomerID', '=', 'orders.CustomerID')
+                        // ->leftJoin('shippers', 'shippers.ShipperID', '=', 'orders.ShipVia')
+                        ->where('OrderID', $id)
+                        ->first();
 
-        $order_details = DB::table('order details')
-                             ->leftJoin('products', 'products.ProductID', '=', 'order details.ProductID')
-                             ->where('OrderID', $id)
-                             ->get();
+        $order_details = OrderDetail::leftJoin('products', 'products.ProductID', '=', 'order details.ProductID')
+                                    ->where('OrderID', $id)
+                                    ->get();
 
         return view('pemesanan.show', compact('order', 'order_details'));
     }
@@ -103,13 +101,6 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            DB::table('orders')->where('OrderID', '=', $id)->delete();
-
-            return redirect('order')->with('pesan_sukses', 'Data pemesanan berhasil dihapus.');
-        }
-        catch(QueryException $e) {
-            return redirect('order')->with('pesan_gagal', $e->getMessage());
-        }
+        //
     }
 }
