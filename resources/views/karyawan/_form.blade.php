@@ -145,9 +145,9 @@
         </div>
 
         <div class="form-group">
-            <label class="col-md-3 control-label" for="PhotoPath">Photo</label>
+            <label class="col-md-3 control-label" for="Photo">Photo</label>
             <div class="col-md-2">
-                <input type="file" id="PhotoPath" name="PhotoPath">
+                <input type="file" id="Photo" name="Photo">
             </div>
         </div>
     </div>
