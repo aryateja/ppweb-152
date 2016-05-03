@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use DB;
 use Validator;
 
 use App\Product;
 use App\Category;
+use App\Supplier;
 use App\Http\Requests;
 
 class ProductController extends Controller
@@ -35,7 +35,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::orderBy('CategoryName', 'asc')->get();
-        $suppliers  = DB::table('suppliers')->orderBy('CompanyName', 'asc')->get();
+        $suppliers  = Supplier::orderBy('CompanyName', 'asc')->get();
 
         return view('produk.create', compact('categories', 'suppliers'));
     }
@@ -102,7 +102,7 @@ class ProductController extends Controller
         try {
             $product    = Product::where('ProductID', $id)->firstOrFail();
             $categories = Category::orderBy('CategoryName', 'asc')->get();
-            $suppliers  = DB::table('suppliers')->orderBy('CompanyName', 'asc')->get();
+            $suppliers  = Supplier::orderBy('CompanyName', 'asc')->get();
 
             return view('produk.edit', compact('product', 'categories', 'suppliers'));
         } 
