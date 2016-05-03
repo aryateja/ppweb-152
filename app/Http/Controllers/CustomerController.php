@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Database\QueryException;
 
-use DB;
-use DateTime;
+use Validator;
+
+use App\Customer;
 use App\Http\Requests;
 
 class CustomerController extends Controller
@@ -18,9 +18,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = DB::table('customers')
-                        ->orderBy('CustomerID', 'asc')
-                        ->paginate(env('PAGINATE'));
+        $customers = Customer::orderBy('CustomerID', 'asc')
+                                ->paginate(env('PAGINATE'));
 
         return view('pelanggan.index', compact('customers'));
     }
@@ -44,31 +43,21 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         try {
-            $this->validate($request, [
+            $validator = Validator::make($request->all(), [
                 'CustomerID'    => 'required|alpha|size:5|unique:customers',
                 'CompanyName'   => 'required',
                 'Phone'         => 'required'
             ]);
 
-            $id = DB::table('customers')->insert([
-                'CustomerID'    => $request->input('CustomerID'), 
-                'CompanyName'   => $request->input('CompanyName'), 
-                'ContactName'   => $request->input('ContactName'), 
-                'ContactTitle'  => $request->input('ContactTitle'), 
-                'Address'       => $request->input('Address'),
-                'City'          => $request->input('City'),
-                'Region'        => $request->input('Region'),
-                'PostalCode'    => $request->input('PostalCode'),
-                'Country'       => $request->input('Country'),
-                'Phone'         => $request->input('Phone'),
-                'Fax'           => $request->input('Fax'),
-                'created_at'    => new DateTime(),
-                'updated_at'    => new DateTime()
-            ]);
+            if ($validator->fails()) {
+                return redirect('customer/create')->withErrors($validator)->withInput();
+            }
+
+            Customer::create($request->all());
 
             return redirect('customer')->with('pesan_sukses', 'Data pelanggan baru berhasil disimpan.');
         } 
-        catch (QueryException $e) {
+        catch (\Exception $e) {
             return redirect('customer')->with('pesan_gagal', $e->getMessage());
         }
     }
@@ -81,7 +70,7 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $customer = DB::table('customers')->where('CustomerID', $id)->first();
+        $customer = Customer::where('CustomerID', $id)->first();
 
         return view('pelanggan.show', compact('customer'));
     }
@@ -94,7 +83,7 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        $customer = DB::table('customers')->where('CustomerID', $id)->first();
+        $customer = Customer::where('CustomerID', $id)->first();
 
         return view('pelanggan.edit', compact('customer'));
     }
@@ -109,26 +98,16 @@ class CustomerController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $this->validate($request, [
+            $validator = Validator::make($request->all(), [
                 'CompanyName'   => 'required',
                 'Phone'         => 'required'
             ]);
 
-            DB::table('customers')
-                ->where('CustomerID', $id)
-                ->update([
-                        'CompanyName'   => $request->input('CompanyName'), 
-                        'ContactName'   => $request->input('ContactName'), 
-                        'ContactTitle'  => $request->input('ContactTitle'), 
-                        'Address'       => $request->input('Address'),
-                        'City'          => $request->input('City'),
-                        'Region'        => $request->input('Region'),
-                        'PostalCode'    => $request->input('PostalCode'),
-                        'Country'       => $request->input('Country'),
-                        'Phone'         => $request->input('Phone'),
-                        'Fax'           => $request->input('Fax'),
-                        'updated_at'    => new DateTime()
-                    ]);
+            if ($validator->fails()) {
+                return redirect('customer/' . $id . '/edit')->withErrors($validator)->withInput();
+            }
+
+            Customer::where('CustomerID', $id)->update($request->except('_method'));
 
             return redirect('customer')->with('pesan_sukses', 'Data pelanggan berhasil diubah.');
         } 
@@ -146,11 +125,11 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         try {
-            DB::table('customers')->where('CustomerID', '=', $id)->delete();
+            Customer::where('CustomerID', '=', $id)->delete();
 
             return redirect('customer')->with('pesan_sukses', 'Data pelanggan berhasil dihapus.');
         }
-        catch(QueryException $e) {
+        catch(\Exception $e) {
             return redirect('customer')->with('pesan_gagal', $e->getMessage());
         }
     }
