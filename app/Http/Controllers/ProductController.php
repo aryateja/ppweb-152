@@ -20,8 +20,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('ProductName', 'asc')
-                            ->leftJoin('categories', 'categories.CategoryID', '=', 'products.CategoryID')
+        $products = Product::with('category')
+                            ->orderBy('ProductName', 'asc')
                             ->paginate(env('PAGINATE'));
 
         return view('produk.index', compact('products'));

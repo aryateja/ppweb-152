@@ -30,7 +30,7 @@
                             {{ $product->ProductName }}
                         </a>
                     </td>
-                    <td>{{ $product->CategoryName }}</td>
+                    <td>{{ $product->category->CategoryName }}</td>
                     <td>{{ $product->QuantityPerUnit }}</td>
                     <td>{{ $product->UnitsInStock }}</td>
                     <td>{{ $product->UnitPrice }}</td>
