@@ -45,4 +45,9 @@ class Product extends Model
         
         return $value . ' pcs';
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'CategoryID');
+    }
 }
