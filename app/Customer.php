@@ -28,4 +28,9 @@ class Customer extends Model
     {
         $this->attributes['CustomerID'] = strtoupper($value);
     }
+
+    public function getCompanyNameAttribute($value)
+    {
+        return 'PT. ' . $value;
+    }
 }

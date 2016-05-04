@@ -30,7 +30,7 @@
                             {{ $customer->CustomerID }}
                         </a>
                     </td>
-                    <td>PT. {{ $customer->CompanyName }}</td>
+                    <td>{{ $customer->CompanyName }}</td>
                     <td>{{ $customer->ContactName }}</td>
                     <td>{{ $customer->Phone }}</td>
                     <td>{{ $customer->Fax }}</td>
