@@ -26,7 +26,7 @@
                     </td>
                     <td>
                         <a href="supplier/{{ $supplier->SupplierID }}">
-                            PT. {{ $supplier->CompanyName }}
+                            {{ $supplier->CompanyName }}
                         </a>
                     </td>
                     <td>{{ $supplier->ContactName }}</td>

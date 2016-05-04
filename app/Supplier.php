@@ -19,4 +19,9 @@ class Supplier extends Model
         'Fax', 
         'HomePage'
     ];
+
+    public function getCompanyNameAttribute($value)
+    {
+        return 'PT. ' . $value;
+    }
 }
