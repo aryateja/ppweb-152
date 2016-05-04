@@ -14,7 +14,7 @@
         <dd>{{ $product->ProductName }}</dd>
 
         <dt>Supplier</dt>
-        <dd>PT. {{ $product->CompanyName }}</dd>
+        <dd>{{ $product->supplier->CompanyName }}</dd>
 
         <dt>Category</dt>
         <dd>{{ $product->CategoryName }}</dd>
