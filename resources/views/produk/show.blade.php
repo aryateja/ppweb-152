@@ -26,13 +26,13 @@
         <dd>{{ $product->UnitPrice }}</dd>
 
         <dt>Units In Stock</dt>
-        <dd>{{ $product->UnitsInStock }} pcs</dd>
+        <dd>{{ $product->UnitsInStock }}</dd>
 
         <dt>Units On Order</dt>
-        <dd>{{ $product->UnitsOnOrder }} pcs</dd>
+        <dd>{{ $product->UnitsOnOrder }}</dd>
 
         <dt>Reorder Level</dt>
-        <dd>{{ $product->ReorderLevel }} pcs</dd>
+        <dd>{{ $product->ReorderLevel }}</dd>
 
         <dt>Discontinued ?</dt>
         <dd>

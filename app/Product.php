@@ -22,4 +22,25 @@ class Product extends Model
     {
         return number_format($value, 2, ',', '.');
     }
+
+    public function getUnitsInStockAttribute($value)
+    {
+        if ($value == 0) return 'out of stock';
+
+        return $value . ' pcs';
+    }
+
+    public function getUnitsOnOrderAttribute($value)
+    {
+        if ($value == 0) return 'out of stock';
+
+        return $value . ' pcs';
+    }
+
+    public function getReorderLevelAttribute($value)
+    {
+        if ($value == 0) return 'out of stock';
+        
+        return $value . ' pcs';
+    }
 }
