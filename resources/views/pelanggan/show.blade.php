@@ -7,7 +7,7 @@
         <li class="active">Detil Pelanggan</li>
     </ol>
 
-    <h1>PT. {{ $customer->CompanyName }}</h1>
+    <h1>{{ $customer->CompanyName }}</h1>
 
     <dl class="dl-horizontal">
         <dt>Customer ID</dt>
