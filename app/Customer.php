@@ -19,4 +19,9 @@ class Customer extends Model
         'Phone',
         'Fax'
     ];
+
+    public function setCustomerIdAttribute($value)
+    {
+        $this->attributes['CustomerID'] = strtoupper($value);
+    }
 }
