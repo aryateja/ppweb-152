@@ -26,7 +26,7 @@
                     </td>
                     <td>
                         <a href="employee/{{ $employee->EmployeeID }}">
-                            {{ $employee->FirstName }} {{ $employee->LastName }}, {{ $employee->TitleOfCourtesy }}
+                            {{ $employee->full_name }}
                         </a>
                     </td>
                     <td>{{ $employee->Title }}</td>

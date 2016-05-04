@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
+    protected $primaryKey = 'EmployeeID';
+
     protected $fillable = [
         'FirstName',
         'LastName',
@@ -26,7 +28,12 @@ class Employee extends Model
         'Salary'
     ];
 
-    // protected $dates = ['BirthDate', 'HireDate'];
+    protected $dates = ['BirthDate', 'HireDate'];
+
+    public function getFullNameAttribute()
+    {
+        return $this->FirstName . ' ' . $this->LastName . ', ' . $this->TitleOfCourtesy;
+    }
 
     public function getBirthDateAttribute($value)
     {
