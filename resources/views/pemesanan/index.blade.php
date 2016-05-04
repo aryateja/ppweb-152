@@ -102,7 +102,7 @@
                             <dt>Reports To</dt>
                             <dd>{{ $employee->ReportsTo }}</dd>
 
-                            <dt>Salary ($)</dt>
+                            <dt>Salary</dt>
                             <dd>{{ $employee->Salary }}</dd>
 
                             <dt>Notes</dt>

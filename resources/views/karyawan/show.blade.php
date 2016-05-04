@@ -14,7 +14,7 @@
         <dd>{{ $employee->Title }}</dd>
 
         <dt>Birth Date</dt>
-        <dd>{{ date_format(date_create($employee->BirthDate), 'd-F-Y') }}</dd>
+        <dd>{{ $employee->BirthDate }}</dd>
 
         <dt>Hire Date</dt>
         <dd>{{ $employee->HireDate }}</dd>
@@ -40,7 +40,7 @@
         <dt>Reports To</dt>
         <dd>{{ $employee->ReportsTo }}</dd>
 
-        <dt>Salary ($)</dt>
+        <dt>Salary</dt>
         <dd>{{ $employee->Salary }}</dd>
 
         <dt>Notes</dt>

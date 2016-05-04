@@ -25,4 +25,21 @@ class Employee extends Model
         'ReportsTo',
         'Salary'
     ];
+
+    // protected $dates = ['BirthDate', 'HireDate'];
+
+    public function getBirthDateAttribute($value)
+    {
+        return date_format(date_create($value), 'd-F-Y');
+    }
+
+    public function getHireDateAttribute($value)
+    {
+        return date_format(date_create($value), 'd-F-Y H:i:s');
+    }
+
+    public function getSalaryAttribute($value)
+    {
+        return '$ ' . number_format($value, 2, ',', '.');
+    }
 }
