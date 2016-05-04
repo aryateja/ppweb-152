@@ -26,4 +26,9 @@ class Supplier extends Model
     {
         return 'PT. ' . $value;
     }
+
+    public function suppliers()
+    {
+        return $this->hasMany(Supplier::class, 'SupplierID');
+    }
 }

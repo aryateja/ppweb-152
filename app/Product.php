@@ -50,4 +50,9 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class, 'CategoryID');
     }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'SupplierID');
+    }
 }
