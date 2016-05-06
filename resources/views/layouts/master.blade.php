@@ -11,11 +11,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-theme.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/sticky-footer-navbar.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert2.min.css') }}">
-
-        <style type="text/css">
-            h1 { margin-bottom: 40px; }
-            label { cursor: hand; cursor: pointer; }
-        </style>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/mystyle.css') }}">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
