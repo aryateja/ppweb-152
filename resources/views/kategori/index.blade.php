@@ -3,7 +3,7 @@
 @section('konten')
     <h1>
         Categories
-        <a href="category/create" class="btn btn-primary">Add New</a>
+        <a href="{{ route('category.create') }}" class="btn btn-primary">Add New</a>
     </h1>
 
     <table class="table table-condensed table-hover">
@@ -25,11 +25,11 @@
                     <td>{{ $category->CategoryName }}</td>
                     <td>{{ $category->Description }}</td>
                     <td>
-                        <a href="/category/{{ $category->CategoryID }}/edit" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
+                        <a href="{{ route('category.edit', $category->CategoryID) }}" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a> 
 
-                        <form method="POST" action="category/{{ $category->CategoryID }}" style="display: inline;">
+                        <form method="POST" action="{{ route('category.destroy', $category->CategoryID) }}" style="display: inline;">
                             {{ method_field('DELETE') }}
 
                             <button type="submit" class="btn btn-danger btn-xs delete-confirm" data-toggle="tooltip" title="Hapus Data">
