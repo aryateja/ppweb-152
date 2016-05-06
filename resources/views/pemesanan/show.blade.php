@@ -13,25 +13,25 @@
         <div class="col-md-4">
             <dl class="dl-horizontal">
                 <dt>Customer</dt>
-                <dd>PT. {{ $order->CompanyName }}</dd>
+                <dd>{{ $order->purchased_by->CompanyName }}</dd>
 
                 <dt>Issued By</dt>
-                <dd>{{ $order->FirstName }} {{ $order->LastName }}, {{ $order->TitleOfCourtesy }}</dd>
+                <dd>{{ $order->issued_by->full_name }}</dd>
 
                 <dt>Order Date</dt>
-                <dd>{{ date_format(date_create($order->OrderDate), 'F-d, Y') }}</dd>
+                <dd>{{ $order->OrderDate }}</dd>
 
                 <dt>Required Date</dt>
-                <dd>{{ date_format(date_create($order->RequiredDate), 'F-d, Y') }}</dd>
+                <dd>{{ $order->RequiredDate }}</dd>
 
                 <dt>Shipped Date</dt>
-                <dd>{{ date_format(date_create($order->ShippedDate), 'F-d, Y') }}</dd>
+                <dd>{{ $order->ShippedDate }}</dd>
 
                 <dt>Freight (Kg)</dt>
                 <dd>{{ $order->Freight }}</dd>
 
                 <dt>Ship Via</dt>
-                <dd>{{ $order->ShipVia }}</dd>
+                <dd>{{ $order->shipped_by->CompanyName }}</dd>
             </dl>
         </div>
         <div class="col-md-6">
@@ -80,15 +80,15 @@
         </tfoot>
         <tbody>
             <?php $i = 1; ?>
-            @foreach($order_details as $order_detail)
+            @foreach($order->purchased_products as $product)
                 <tr>
                     <td><?php echo $i++; ?></td>
-                    <td>{{ $order_detail->ProductName }}</td>
-                    <td>{{ $order_detail->UnitPrice }}</td>
-                    <td>{{ $order_detail->Quantity }}</td>
-                    <td>{{ $order_detail->Discount }}</td>
+                    <td>{{ $product->ProductName }}</td>
+                    <td>{{ $product->UnitPrice }}</td>
+                    <td>{{ $product->Quantity }}</td>
+                    <td>{{ $product->Discount }}</td>
                     <td>
-                        {{ ($order_detail->UnitPrice * $order_detail->Quantity) }}
+                        {{ ($product->UnitPrice * $product->Quantity) }}
                     </td>
                 </tr>
             @endforeach

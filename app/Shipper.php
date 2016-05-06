@@ -12,4 +12,9 @@ class Shipper extends Model
         'CompanyName',
         'Phone'
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'ShipperID');
+    }
 }

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Order;
-use App\Employee;
-use App\OrderDetail;
 use App\Http\Requests;
 
 class OrderController extends Controller
@@ -18,14 +16,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::leftJoin('employees', 'employees.EmployeeID', '=', 'orders.EmployeeID')
-                        ->leftJoin('customers', 'customers.CustomerID', '=', 'orders.CustomerID')
+        $orders = Order::with('purchased_by', 'issued_by')
                         ->orderBy('OrderID', 'asc')
                         ->paginate(env('PAGINATE'));
 
-        $employees  = Employee::all();
-
-        return view('pemesanan.index', compact('orders', 'employees'));
+        return view('pemesanan.index', compact('orders'));
     }
 
     /**
@@ -57,17 +52,11 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order = Order::leftJoin('employees', 'employees.EmployeeID', '=', 'orders.EmployeeID')
-                        ->leftJoin('customers', 'customers.CustomerID', '=', 'orders.CustomerID')
-                        // ->leftJoin('shippers', 'shippers.ShipperID', '=', 'orders.ShipVia')
+        $order = Order::with('purchased_by', 'issued_by', 'shipped_by', 'purchased_products')
                         ->where('OrderID', $id)
                         ->first();
 
-        $order_details = OrderDetail::leftJoin('products', 'products.ProductID', '=', 'order details.ProductID')
-                                    ->where('OrderID', $id)
-                                    ->get();
-
-        return view('pemesanan.show', compact('order', 'order_details'));
+        return view('pemesanan.show', compact('order'));
     }
 
     /**

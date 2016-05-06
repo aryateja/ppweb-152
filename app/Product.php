@@ -55,4 +55,9 @@ class Product extends Model
     {
         return $this->belongsTo(Supplier::class, 'SupplierID');
     }
+
+    public function ordered_on()
+    {
+        return $this->belongsToMany(Order::class, $this->primaryKey, 'OrderID');
+    }
 }

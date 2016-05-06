@@ -31,15 +31,15 @@
                         </a>
                     </td>
                     <td>
-                        <span data-toggle="tooltip" data-placement="right" title="PT. {{ $order->CompanyName }}">
-                            <abbr title="ID Pelanggan">{{ $order->CustomerID }}</abbr>
+                        <span data-toggle="tooltip" data-placement="right" title="{{ $order->purchased_by->CompanyName }}">
+                            <abbr title="ID Pelanggan">{{ $order->purchased_by->CustomerID }}</abbr>
                         </span>
                     </td>
-                    <td>{{ date_format(date_create($order->OrderDate), 'd-F-Y') }}</td>
-                    <td>{{ date_format(date_create($order->ShippedDate), 'd-F-Y') }}</td>
+                    <td>{{ $order->OrderDate }}</td>
+                    <td>{{ $order->ShippedDate }}</td>
                     <td>
                         <a href="#" data-toggle="modal" data-target="#myModal-{{ $order->EmployeeID }}">
-                            {{ $order->FirstName }} {{ $order->LastName }} <span class="glyphicon glyphicon-modal-window"></span>
+                            {{ $order->issued_by->full_name }} <span class="glyphicon glyphicon-modal-window"></span>
                         </a>
                     </td>
                     <td>
@@ -59,54 +59,53 @@
     <div class="pull-right">{!! $orders->links() !!}</div>
 
     <!-- Modal -->
-    @foreach($employees as $employee)
-        <!-- Modal -->
-        <div class="modal fade" id="myModal-{{ $employee->EmployeeID }}" tabindex="-1">
+    @foreach($orders as $order)
+        <div class="modal fade" id="myModal-{{ $order->issued_by->EmployeeID }}" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="myModalLabel">
-                            {{ $employee->FirstName }} {{ $employee->LastName }}, {{ $employee->TitleOfCourtesy }}
+                            {{ $order->issued_by->full_name }}
                         </h3>
                     </div>
 
                     <div class="modal-body">
                         <dl class="dl-horizontal">
                             <dt>Title</dt>
-                            <dd>{{ $employee->Title }}</dd>
+                            <dd>{{ $order->issued_by->Title }}</dd>
 
                             <dt>Birth Date</dt>
-                            <dd>{{ date_format(date_create($employee->BirthDate), 'd-F-Y') }}</dd>
+                            <dd>{{ $order->issued_by->BirthDate }}</dd>
 
                             <dt>Hire Date</dt>
-                            <dd>{{ $employee->HireDate }}</dd>
+                            <dd>{{ $order->issued_by->HireDate }}</dd>
 
                             <dt>Address</dt>
-                            <dd>{{ $employee->Address }}</dd>
+                            <dd>{{ $order->issued_by->Address }}</dd>
 
                             <dt>City</dt>
-                            <dd>{{ $employee->City }}</dd>
+                            <dd>{{ $order->issued_by->City }}</dd>
 
                             <dt>Region</dt>
-                            <dd>{{ $employee->Region }}</dd>
+                            <dd>{{ $order->issued_by->Region }}</dd>
 
                             <dt>Postal Code</dt>
-                            <dd>{{ $employee->PostalCode }}</dd>
+                            <dd>{{ $order->issued_by->PostalCode }}</dd>
 
                             <dt>Country</dt>
-                            <dd>{{ $employee->Country }}</dd>
+                            <dd>{{ $order->issued_by->Country }}</dd>
 
                             <dt>HomePhone</dt>
-                            <dd>{{ $employee->HomePhone }} ext. {{ $employee->Extension }}</dd>
+                            <dd>{{ $order->issued_by->HomePhone }} ext. {{ $order->issued_by->Extension }}</dd>
 
                             <dt>Reports To</dt>
-                            <dd>{{ $employee->ReportsTo }}</dd>
+                            <dd>{{ $order->issued_by->ReportsTo }}</dd>
 
                             <dt>Salary</dt>
-                            <dd>{{ $employee->Salary }}</dd>
+                            <dd>{{ $order->issued_by->Salary }}</dd>
 
                             <dt>Notes</dt>
-                            <dd>{{ $employee->Notes }}</dd>
+                            <dd>{{ $order->issued_by->Notes }}</dd>
                         </dl>
                     </div>
 
