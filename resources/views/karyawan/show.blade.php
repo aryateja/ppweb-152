@@ -1,13 +1,11 @@
 @extends('layouts.master')
 
 @section('konten')
-    <ol class="breadcrumb">
-        <li><a href="/">Home</a></li>
-        <li><a href="/employee">Karyawan</a></li>
+    @include('karyawan._breadcrumb')
         <li class="active">Detil Karyawan</li>
     </ol>
 
-    <h1>{{ $employee->FirstName }} {{ $employee->LastName }}, {{ $employee->TitleOfCourtesy }}</h1>
+    <h1>{{ $employee->full_name }}</h1>
 
     <dl class="dl-horizontal">
         <dt>Title</dt>
@@ -47,11 +45,11 @@
         <dd>{{ $employee->Notes }}</dd>
     </dl>
 
-    <a href="/employee/{{ $employee->EmployeeID }}/edit" class="btn btn-default" data-toggle="tooltip" title="Ubah Data">
+    <a href="{{ route('employee.edit', $employee->EmployeeID) }}" class="btn btn-default" data-toggle="tooltip" title="Ubah Data">
         <span class="glyphicon glyphicon-pencil"></span> Ubah
     </a> 
 
-    <form method="POST" action="/employee/{{ $employee->EmployeeID }}" style="display: inline;">
+    <form method="POST" action="{{ route('employee.destroy', $employee->EmployeeID) }}" style="display: inline;">
         {{ method_field('DELETE') }}
 
         <button type="submit" class="btn btn-danger delete-confirm" data-toggle="tooltip" title="Hapus Data">
