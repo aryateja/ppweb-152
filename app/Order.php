@@ -43,7 +43,7 @@ class Order extends Model
     {
         $p = new Product();
 
-        return $this->belongsToMany(Product::class, 'order details', $this->primaryKey, $p->getKeyName())
+        return $this->belongsToMany(Product::class, 'order_details', $this->primaryKey, $p->getKeyName())
                     ->withPivot('UnitPrice', 'Quantity', 'Discount');
     }
 }

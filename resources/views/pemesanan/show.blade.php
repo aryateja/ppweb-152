@@ -84,11 +84,11 @@
                 <tr>
                     <td><?php echo $i++; ?></td>
                     <td>{{ $product->ProductName }}</td>
-                    <td>{{ $product->UnitPrice }}</td>
-                    <td>{{ $product->Quantity }}</td>
-                    <td>{{ $product->Discount }}</td>
+                    <td>{{ $product->pivot->UnitPrice }}</td>
+                    <td>{{ $product->pivot->Quantity }}</td>
+                    <td>{{ $product->pivot->Discount }}</td>
                     <td>
-                        {{ ($product->UnitPrice * $product->Quantity) }}
+                        {{ ($product->pivot->UnitPrice * $product->pivot->Quantity) }}
                     </td>
                 </tr>
             @endforeach
