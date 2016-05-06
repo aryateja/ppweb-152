@@ -5,9 +5,9 @@
         <li class="active">Ubah Kategori</li>
     </ol>
 
-    <h1>Kategori ID: {{ $category->CategoryID }}</h1>
+    <h1>Kategori ID: {{ $category->getKey() }}</h1>
 
-    <form method="POST" action="{{ route('category.update', $category->CategoryID) }}" class="form-horizontal">
+    <form method="POST" action="{{ route('category.update', $category->getKey()) }}" class="form-horizontal">
         {{ method_field('PATCH') }}
 
         @include('kategori._form')
