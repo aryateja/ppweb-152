@@ -42,11 +42,11 @@
         </dd>
     </dl>
 
-    <a href="{{ route('product.edit', $product->ProductID) }}" class="btn btn-default" data-toggle="tooltip" title="Ubah Data">
+    <a href="{{ route('product.edit', $product->getKey()) }}" class="btn btn-default" data-toggle="tooltip" title="Ubah Data">
         <span class="glyphicon glyphicon-pencil"></span> Ubah
     </a> 
 
-    <form method="POST" action="{{ route('product.destroy', $product->ProductID) }}" style="display: inline;">
+    <form method="POST" action="{{ route('product.destroy', $product->getKey()) }}" style="display: inline;">
         {{ method_field('DELETE') }}
 
         <button type="submit" class="btn btn-danger delete-confirm" data-toggle="tooltip" title="Hapus Data">

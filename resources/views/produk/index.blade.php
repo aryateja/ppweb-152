@@ -26,7 +26,7 @@
                         <?php echo ($i++ + ($products->currentPage() * $products->perPage()) - $products->perPage()); ?>
                     </td>
                     <td>
-                        <a href="{{ route('product.show', $product->ProductID) }}">
+                        <a href="{{ route('product.show', $product->getKey()) }}">
                             {{ $product->ProductName }}
                         </a>
                     </td>
@@ -35,11 +35,11 @@
                     <td>{{ $product->UnitsInStock }}</td>
                     <td>{{ $product->UnitPrice }}</td>
                     <td>
-                        <a href="{{ route('product.edit', $product->ProductID) }}" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
+                        <a href="{{ route('product.edit', $product->getKey()) }}" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a> 
 
-                        <form method="POST" action="{{ route('product.destroy', $product->ProductID) }}" style="display: inline;">
+                        <form method="POST" action="{{ route('product.destroy', $product->getKey()) }}" style="display: inline;">
                             {{ method_field('DELETE') }}
 
                             <button type="submit" class="btn btn-danger btn-xs delete-confirm" data-toggle="tooltip" title="Hapus Data">
