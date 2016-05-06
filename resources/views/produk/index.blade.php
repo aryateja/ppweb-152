@@ -3,7 +3,7 @@
 @section('konten')
     <h1>
         Products
-        <a href="product/create" class="btn btn-primary">Add New</a>
+        <a href="{{ route('product.create') }}" class="btn btn-primary">Add New</a>
     </h1>
 
     <table class="table table-condensed table-hover">
@@ -13,7 +13,7 @@
                 <th>Nama</th>
                 <th>Kategori</th>
                 <th>Isi per Unit</th>
-                <th>Stok (pcs)</th>
+                <th>Stok Gudang</th>
                 <th>Harga ($)</th>
                 <th></th>
             </tr>
@@ -26,7 +26,7 @@
                         <?php echo ($i++ + ($products->currentPage() * $products->perPage()) - $products->perPage()); ?>
                     </td>
                     <td>
-                        <a href="product/{{ $product->ProductID }}">
+                        <a href="{{ route('product.show', $product->ProductID) }}">
                             {{ $product->ProductName }}
                         </a>
                     </td>
@@ -35,11 +35,11 @@
                     <td>{{ $product->UnitsInStock }}</td>
                     <td>{{ $product->UnitPrice }}</td>
                     <td>
-                        <a href="/product/{{ $product->ProductID }}/edit" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
+                        <a href="{{ route('product.edit', $product->ProductID) }}" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a> 
 
-                        <form method="POST" action="/product/{{ $product->ProductID }}" style="display: inline;">
+                        <form method="POST" action="{{ route('product.destroy', $product->ProductID) }}" style="display: inline;">
                             {{ method_field('DELETE') }}
 
                             <button type="submit" class="btn btn-danger btn-xs delete-confirm" data-toggle="tooltip" title="Hapus Data">
