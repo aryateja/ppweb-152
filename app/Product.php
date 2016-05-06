@@ -58,6 +58,6 @@ class Product extends Model
 
     public function ordered_on()
     {
-        return $this->belongsToMany(Order::class, $this->primaryKey, 'OrderID');
+        return $this->belongsToMany(Order::class);
     }
 }
