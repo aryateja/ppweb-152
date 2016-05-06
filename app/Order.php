@@ -8,6 +8,22 @@ class Order extends Model
 {
     protected $primaryKey = 'OrderID';
 
+    protected $fillable = [
+        'CustomerID',
+        'EmployeeID',
+        'OrderDate',
+        'RequiredDate',
+        'ShippedDate',
+        'ShipVia',
+        'Freight',
+        'ShipName',
+        'ShipAddress',
+        'ShipCity',
+        'ShipRegion',
+        'ShipPostalCode',
+        'ShipCountry'
+    ];
+
     public function purchased_by()
     {
         return $this->belongsTo(Customer::class, 'CustomerID');
@@ -25,6 +41,9 @@ class Order extends Model
 
     public function purchased_products()
     {
-        return $this->belongsToMany(Product::class, 'order details', $this->primaryKey, 'ProductID');
+        $p = new Product();
+
+        return $this->belongsToMany(Product::class, 'order details', $this->primaryKey, $p->getKeyName())
+                    ->withPivot('UnitPrice', 'Quantity', 'Discount');
     }
 }
