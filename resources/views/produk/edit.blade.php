@@ -7,7 +7,7 @@
 
     <h1>Produk ID: {{ $product->ProductID }}</h1>
 
-    <form method="POST" action="{{ route('product.show', $product->ProductID) }}" class="form-horizontal">
+    <form method="POST" action="{{ route('product.update', $product->ProductID) }}" class="form-horizontal">
         {{ method_field('PATCH') }}
 
         @include('produk._form')
