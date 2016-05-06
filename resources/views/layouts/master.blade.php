@@ -34,17 +34,17 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">PPWeb 152</a>
+                    <a class="navbar-brand" href="{{ url('/') }}">PPWeb 152</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="/category">Kategori</a></li>
-                        <li><a href="/product">Produk</a></li>
-                        <li><a href="/employee">Karyawan</a></li>
-                        <li><a href="/supplier">Pemasok</a></li>
-                        <li><a href="/customer">Pelanggan</a></li>
-                        <li><a href="/shipper">Kurir</a></li>
-                        <li><a href="/order">Pemesanan</a></li>
+                        <li><a href="{{ url('category') }}">Kategori</a></li>
+                        <li><a href="{{ url('product') }}">Produk</a></li>
+                        <li><a href="{{ url('employee') }}">Karyawan</a></li>
+                        <li><a href="{{ url('supplier') }}">Pemasok</a></li>
+                        <li><a href="{{ url('customer') }}">Pelanggan</a></li>
+                        <li><a href="{{ url('shipper') }}">Kurir</a></li>
+                        <li><a href="{{ url('order') }}">Pemesanan</a></li>
                     </ul>
                 </div>
             </div>
