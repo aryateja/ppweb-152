@@ -1,9 +1,7 @@
 @extends('layouts.master')
 
 @section('konten')
-    <ol class="breadcrumb">
-        <li><a href="/">Home</a></li>
-        <li><a href="/supplier">Pemasok</a></li>
+    @include('pemasok._breadcrumb')
         <li class="active">Detil Pemasok</li>
     </ol>
 
@@ -41,11 +39,11 @@
         <dd>{{ $supplier->HomePage }}</dd>
     </dl>
 
-    <a href="/supplier/{{ $supplier->SupplierID }}/edit" class="btn btn-default" data-toggle="tooltip" title="Ubah Data">
+    <a href="{{ route('supplier.edit', $supplier->SupplierID) }}" class="btn btn-default" data-toggle="tooltip" title="Ubah Data">
         <span class="glyphicon glyphicon-pencil"></span> Ubah
     </a> 
 
-    <form method="POST" action="/supplier/{{ $supplier->SupplierID }}" style="display: inline;">
+    <form method="POST" action="{{ route('supplier.destroy', $supplier->SupplierID) }}" style="display: inline;">
         {{ method_field('DELETE') }}
 
         <button type="submit" class="btn btn-danger delete-confirm" data-toggle="tooltip" title="Hapus Data">
