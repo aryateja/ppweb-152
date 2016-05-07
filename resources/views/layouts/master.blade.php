@@ -60,7 +60,7 @@
 
         <footer class="footer">
             <div class="container">
-                <p class="text-muted">&copy; 2016. Rachmat Kukuh Rahadiansyah.</p>
+                <p class="text-muted">&copy; {{ \Carbon\Carbon::now()->year }}. Rachmat Kukuh Rahadiansyah.</p>
             </div>
         </footer>
 
