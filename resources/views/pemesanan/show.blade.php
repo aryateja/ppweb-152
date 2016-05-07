@@ -1,13 +1,11 @@
 @extends('layouts.master')
 
 @section('konten')
-    <ol class="breadcrumb">
-        <li><a href="/">Home</a></li>
-        <li><a href="/order">Pemesanan</a></li>
+    @include('pemesanan._breadcrumb')
         <li class="active">Detil Pemesanan</li>
     </ol>
 
-    <h1>Order ID: #{{ $order->OrderID }}</h1>
+    <h1>Order ID: #{{ $order->getKey() }}</h1>
 
     <div class="row">
         <div class="col-md-4">

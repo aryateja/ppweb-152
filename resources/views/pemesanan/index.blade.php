@@ -3,7 +3,7 @@
 @section('konten')
     <h1>
         Orders
-        <a href="order/create" class="btn btn-primary">Add New</a>
+        <a href="{{ route('order.create') }}" class="btn btn-primary">Add New</a>
     </h1>
 
     <table class="table table-condensed table-hover">
@@ -26,8 +26,8 @@
                         <?php echo ($i++ + ($orders->currentPage() * $orders->perPage()) - $orders->perPage()); ?>
                     </td>
                     <td>
-                        <a href="order/{{ $order->OrderID }}">
-                            #{{ $order->OrderID }}
+                        <a href="{{ route('order.show', $order->getKey()) }}">
+                            #{{ $order->getKey() }}
                         </a>
                     </td>
                     <td>
@@ -43,7 +43,7 @@
                         </a>
                     </td>
                     <td>
-                        <form method="POST" action="/order/{{ $order->OrderID }}" style="display: inline;">
+                        <form method="POST" action="{{ route('order.destroy', $order->getKey()) }}" style="display: inline;">
                             {{ method_field('DELETE') }}
 
                             <button type="submit" class="btn btn-danger btn-xs delete-confirm" data-toggle="tooltip" title="Hapus Data">
