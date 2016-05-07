@@ -45,11 +45,11 @@
         <dd>{{ $employee->Notes }}</dd>
     </dl>
 
-    <a href="{{ route('employee.edit', $employee->EmployeeID) }}" class="btn btn-default" data-toggle="tooltip" title="Ubah Data">
+    <a href="{{ route('employee.edit', $employee->getKey()) }}" class="btn btn-default" data-toggle="tooltip" title="Ubah Data">
         <span class="glyphicon glyphicon-pencil"></span> Ubah
     </a> 
 
-    <form method="POST" action="{{ route('employee.destroy', $employee->EmployeeID) }}" style="display: inline;">
+    <form method="POST" action="{{ route('employee.destroy', $employee->getKey()) }}" style="display: inline;">
         {{ method_field('DELETE') }}
 
         <button type="submit" class="btn btn-danger delete-confirm" data-toggle="tooltip" title="Hapus Data">
