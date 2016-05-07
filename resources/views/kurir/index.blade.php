@@ -3,7 +3,7 @@
 @section('konten')
     <h1>
         Shippers
-        <a href="shipper/create" class="btn btn-primary">Add New</a>
+        <a href="{{ route('shipper.create') }}" class="btn btn-primary">Add New</a>
     </h1>
 
     <table class="table table-condensed table-hover">
@@ -25,11 +25,11 @@
                     <td>{{ $shipper->CompanyName }}</td>
                     <td>{{ $shipper->Phone }}</td>
                     <td>
-                        <a href="/shipper/{{ $shipper->ShipperID }}/edit" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
+                        <a href="{{ route('shipper.edit', $shipper->getKey()) }}" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a> 
 
-                        <form method="POST" action="/shipper/{{ $shipper->ShipperID }}" style="display: inline;">
+                        <form method="POST" action="{{ route('shipper.destroy', $shipper->getKey()) }}" style="display: inline;">
                             {{ method_field('DELETE') }}
 
                             <button type="submit" class="btn btn-danger btn-xs delete-confirm" data-toggle="tooltip" title="Hapus Data">
