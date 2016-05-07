@@ -5,7 +5,7 @@
         <li class="active">Detil Pemasok</li>
     </ol>
 
-    <h1>{{ $supplier->CompanyName }}</h1>
+    <h1>{{ $supplier->company_name_formatted }}</h1>
 
     <dl class="dl-horizontal">
         <dt>Contact Person</dt>

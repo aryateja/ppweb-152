@@ -22,9 +22,9 @@ class Supplier extends Model
         'HomePage'
     ];
 
-    public function getCompanyNameAttribute($value)
+    public function getCompanyNameFormattedAttribute()
     {
-        return 'PT. ' . $value;
+        return 'PT. ' . $this->CompanyName;
     }
 
     public function suppliers()

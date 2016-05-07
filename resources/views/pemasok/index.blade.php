@@ -26,7 +26,7 @@
                     </td>
                     <td>
                         <a href="{{ route('supplier.show', $supplier->getKey()) }}">
-                            {{ $supplier->CompanyName }}
+                            {{ $supplier->company_name_formatted }}
                         </a>
                     </td>
                     <td>{{ $supplier->ContactName }}</td>
