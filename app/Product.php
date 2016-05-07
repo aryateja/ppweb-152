@@ -20,30 +20,45 @@ class Product extends Model
         'Discontinued'
     ];
 
-    public function getUnitPriceAttribute($value)
+    public function getUnitPriceFormattedAttribute()
     {
-        return number_format($value, 2, ',', '.');
+        return number_format($this->UnitPrice, 2, ',', '.');
     }
 
-    public function getUnitsInStockAttribute($value)
+    public function getUnitsInStockFormattedAttribute()
     {
-        if ($value == 0) return 'out of stock';
+        if ($this->UnitsInStock == 0) return 'out of stock';
 
-        return $value . ' pcs';
+        return $this->UnitsInStock;
     }
 
-    public function getUnitsOnOrderAttribute($value)
+    public function getUnitsInStockPcsAttribute()
     {
-        if ($value == 0) return 'out of stock';
+        if ($this->UnitsInStock == 0) return 'out of stock';
 
-        return $value . ' pcs';
+        return $this->UnitsInStock . ' pcs';
     }
 
-    public function getReorderLevelAttribute($value)
+    public function getUnitsOnOrderPcsAttribute()
     {
-        if ($value == 0) return 'out of stock';
+        if ($this->UnitsOnOrder == 0) return 'out of stock';
+
+        return $this->UnitsOnOrder . ' pcs';
+    }
+
+    public function getReorderLevelPcsAttribute()
+    {
+        if ($this->ReorderLevel == 0) return 'out of stock';
         
-        return $value . ' pcs';
+        return $this->ReorderLevel . ' pcs';
+    }
+
+    public function getDiscontinuedFormattedAttribute()
+    {
+        if ($this->Discontinued)
+            return 'OUT OF ORDER';
+        else
+            return 'CONTINUE';
     }
 
     public function category()

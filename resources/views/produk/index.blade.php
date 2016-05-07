@@ -10,10 +10,10 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Nama</th>
+                <th>Nama Produk</th>
                 <th>Kategori</th>
                 <th>Isi per Unit</th>
-                <th>Stok Gudang</th>
+                <th>Stok (pcs)</th>
                 <th>Harga ($)</th>
                 <th></th>
             </tr>
@@ -32,8 +32,8 @@
                     </td>
                     <td>{{ $product->category->CategoryName }}</td>
                     <td>{{ $product->QuantityPerUnit }}</td>
-                    <td>{{ $product->UnitsInStock }}</td>
-                    <td>{{ $product->UnitPrice }}</td>
+                    <td>{{ $product->units_in_stock_formatted }}</td>
+                    <td>{{ $product->unit_price_formatted }}</td>
                     <td>
                         <a href="{{ route('product.edit', $product->getKey()) }}" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
                             <span class="glyphicon glyphicon-pencil"></span>
