@@ -37,17 +37,27 @@ class Employee extends Model
 
     public function getBirthDateAttribute($value)
     {
-        return date_format(date_create($value), 'd-F-Y');
+        return date_format(date_create($value), 'Y-m-d');
     }
 
-    public function getHireDateAttribute($value)
+    public function getBirthDateFormattedAttribute()
     {
-        return date_format(date_create($value), 'd-F-Y H:i:s');
+        return date_format(date_create($this->BirthDate), 'd-F-Y');
     }
 
-    public function getSalaryAttribute($value)
+    public function getHireDateFormattedAttribute()
     {
-        return '$ ' . number_format($value, 2, ',', '.');
+        return date_format(date_create($this->HireDate), 'd-F-Y');
+    }
+
+    public function getPhoneAttribute()
+    {
+        return $this->HomePhone . ' &mdash; ext. ' . $this->Extension;
+    }
+
+    public function getSalaryFormattedAttribute()
+    {
+        return '$ ' . number_format($this->Salary, 2, ',', '.');
     }
 
     public function orders()

@@ -12,10 +12,10 @@
         <dd>{{ $employee->Title }}</dd>
 
         <dt>Birth Date</dt>
-        <dd>{{ $employee->BirthDate }}</dd>
+        <dd>{{ $employee->birth_date_formatted }}</dd>
 
         <dt>Hire Date</dt>
-        <dd>{{ $employee->HireDate }}</dd>
+        <dd>{{ $employee->hire_date_formatted }}</dd>
 
         <dt>Address</dt>
         <dd>{{ $employee->Address }}</dd>
@@ -32,14 +32,14 @@
         <dt>Country</dt>
         <dd>{{ $employee->Country }}</dd>
 
-        <dt>HomePhone</dt>
-        <dd>{{ $employee->HomePhone }} ext. {{ $employee->Extension }}</dd>
+        <dt>Phone</dt>
+        <dd>{{ $employee->phone }}</dd>
 
         <dt>Reports To</dt>
         <dd>{{ $employee->ReportsTo }}</dd>
 
         <dt>Salary</dt>
-        <dd>{{ $employee->Salary }}</dd>
+        <dd>{{ $employee->salary_formatted }}</dd>
 
         <dt>Notes</dt>
         <dd>{{ $employee->Notes }}</dd>
