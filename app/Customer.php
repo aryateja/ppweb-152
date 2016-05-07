@@ -11,9 +11,9 @@ class Customer extends Model
     protected $primaryKey = 'CustomerID';
 
     protected $fillable = [
-        'CustomerID', 
-        'CompanyName', 
-        'ContactName', 
+        'CustomerID',
+        'CompanyName',
+        'ContactName',
         'ContactTitle', 
         'Address',
         'City',
@@ -29,9 +29,9 @@ class Customer extends Model
         $this->attributes['CustomerID'] = strtoupper($value);
     }
 
-    public function getCompanyNameAttribute($value)
+    public function getCompanyNameFormattedAttribute()
     {
-        return 'PT. ' . $value;
+        return 'PT. ' . $this->CompanyName;
     }
 
     public function orders()

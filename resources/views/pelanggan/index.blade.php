@@ -27,10 +27,10 @@
                     </td>
                     <td>
                         <a href="{{ route('customer.show', $customer->getKey()) }}">
-                            {{ $customer->CustomerID }}
+                            {{ $customer->getKey() }}
                         </a>
                     </td>
-                    <td>{{ $customer->CompanyName }}</td>
+                    <td>{{ $customer->company_name_formatted }}</td>
                     <td>{{ $customer->ContactName }}</td>
                     <td>{{ $customer->Phone }}</td>
                     <td>{{ $customer->Fax }}</td>

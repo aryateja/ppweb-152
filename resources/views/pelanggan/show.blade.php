@@ -5,7 +5,7 @@
         <li class="active">Detil Pelanggan</li>
     </ol>
 
-    <h1>{{ $customer->CompanyName }}</h1>
+    <h1>{{ $customer->company_name_formatted }}</h1>
 
     <dl class="dl-horizontal">
         <dt>Customer ID</dt>
