@@ -39,11 +39,11 @@
         <dd>{{ $supplier->HomePage }}</dd>
     </dl>
 
-    <a href="{{ route('supplier.edit', $supplier->SupplierID) }}" class="btn btn-default" data-toggle="tooltip" title="Ubah Data">
+    <a href="{{ route('supplier.edit', $supplier->getKey()) }}" class="btn btn-default" data-toggle="tooltip" title="Ubah Data">
         <span class="glyphicon glyphicon-pencil"></span> Ubah
     </a> 
 
-    <form method="POST" action="{{ route('supplier.destroy', $supplier->SupplierID) }}" style="display: inline;">
+    <form method="POST" action="{{ route('supplier.destroy', $supplier->getKey()) }}" style="display: inline;">
         {{ method_field('DELETE') }}
 
         <button type="submit" class="btn btn-danger delete-confirm" data-toggle="tooltip" title="Hapus Data">

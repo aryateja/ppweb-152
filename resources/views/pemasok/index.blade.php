@@ -25,7 +25,7 @@
                         <?php echo ($i++ + ($suppliers->currentPage() * $suppliers->perPage()) - $suppliers->perPage()); ?>
                     </td>
                     <td>
-                        <a href="{{ route('supplier.show', $supplier->SupplierID) }}">
+                        <a href="{{ route('supplier.show', $supplier->getKey()) }}">
                             {{ $supplier->CompanyName }}
                         </a>
                     </td>
@@ -33,11 +33,11 @@
                     <td>{{ $supplier->Phone }}</td>
                     <td>{{ $supplier->Fax }}</td>
                     <td>
-                        <a href="{{ route('supplier.edit', $supplier->SupplierID) }}" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
+                        <a href="{{ route('supplier.edit', $supplier->getKey()) }}" class="btn btn-default btn-xs" data-toggle="tooltip" title="Ubah Data">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a> 
 
-                        <form method="POST" action="{{ route('supplier.destroy', $supplier->SupplierID) }}" style="display: inline;">
+                        <form method="POST" action="{{ route('supplier.destroy', $supplier->getKey()) }}" style="display: inline;">
                             {{ method_field('DELETE') }}
 
                             <button type="submit" class="btn btn-danger btn-xs delete-confirm" data-toggle="tooltip" title="Hapus Data">
