@@ -31,12 +31,12 @@
                         </a>
                     </td>
                     <td>
-                        <span data-toggle="tooltip" data-placement="right" title="{{ $order->purchased_by->CompanyName }}">
+                        <span data-toggle="tooltip" data-placement="right" title="{{ $order->purchased_by->company_name_formatted }}">
                             <abbr title="ID Pelanggan">{{ $order->purchased_by->CustomerID }}</abbr>
                         </span>
                     </td>
-                    <td>{{ $order->OrderDate }}</td>
-                    <td>{{ $order->ShippedDate }}</td>
+                    <td>{{ $order->order_date_formatted }}</td>
+                    <td>{{ $order->shipped_date_formatted }}</td>
                     <td>
                         <a href="#" data-toggle="modal" data-target="#myModal-{{ $order->EmployeeID }}">
                             {{ $order->issued_by->full_name }} <span class="glyphicon glyphicon-modal-window"></span>
@@ -75,10 +75,10 @@
                             <dd>{{ $order->issued_by->Title }}</dd>
 
                             <dt>Birth Date</dt>
-                            <dd>{{ $order->issued_by->BirthDate }}</dd>
+                            <dd>{{ $order->issued_by->birth_date_formatted }}</dd>
 
                             <dt>Hire Date</dt>
-                            <dd>{{ $order->issued_by->HireDate }}</dd>
+                            <dd>{{ $order->issued_by->hire_date_formatted }}</dd>
 
                             <dt>Address</dt>
                             <dd>{{ $order->issued_by->Address }}</dd>
@@ -95,8 +95,8 @@
                             <dt>Country</dt>
                             <dd>{{ $order->issued_by->Country }}</dd>
 
-                            <dt>HomePhone</dt>
-                            <dd>{{ $order->issued_by->HomePhone }} ext. {{ $order->issued_by->Extension }}</dd>
+                            <dt>Phone</dt>
+                            <dd>{{ $order->issued_by->phone }}</dd>
 
                             <dt>Reports To</dt>
                             <dd>{{ $order->issued_by->ReportsTo }}</dd>

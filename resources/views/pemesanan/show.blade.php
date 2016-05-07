@@ -11,22 +11,22 @@
         <div class="col-md-4">
             <dl class="dl-horizontal">
                 <dt>Customer</dt>
-                <dd>{{ $order->purchased_by->CompanyName }}</dd>
+                <dd>{{ $order->purchased_by->company_name_formatted }}</dd>
 
                 <dt>Issued By</dt>
                 <dd>{{ $order->issued_by->full_name }}</dd>
 
                 <dt>Order Date</dt>
-                <dd>{{ $order->OrderDate }}</dd>
+                <dd>{{ $order->order_date_formatted }}</dd>
 
                 <dt>Required Date</dt>
-                <dd>{{ $order->RequiredDate }}</dd>
+                <dd>{{ $order->required_date_formatted }}</dd>
 
                 <dt>Shipped Date</dt>
-                <dd>{{ $order->ShippedDate }}</dd>
+                <dd>{{ $order->shipped_date_formatted }}</dd>
 
-                <dt>Freight (Kg)</dt>
-                <dd>{{ $order->Freight }}</dd>
+                <dt>Freight</dt>
+                <dd>{{ $order->freight_formatted }}</dd>
 
                 <dt>Ship Via</dt>
                 <dd>{{ $order->shipped_by->CompanyName }}</dd>
