@@ -30,6 +30,11 @@ class Employee extends Model
 
     protected $dates = ['BirthDate', 'HireDate'];
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'EmployeeID');
+    }
+
     public function getFullNameAttribute()
     {
         return $this->FirstName . ' ' . $this->LastName . ', ' . $this->TitleOfCourtesy;
@@ -58,10 +63,5 @@ class Employee extends Model
     public function getSalaryFormattedAttribute()
     {
         return '$ ' . number_format($this->Salary, 2, ',', '.');
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'EmployeeID');
     }
 }

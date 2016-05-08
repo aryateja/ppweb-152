@@ -24,6 +24,11 @@ class Customer extends Model
         'Fax'
     ];
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'CustomerID');
+    }
+
     public function setCustomerIdAttribute($value)
     {
         $this->attributes['CustomerID'] = strtoupper($value);
@@ -32,10 +37,5 @@ class Customer extends Model
     public function getCompanyNameFormattedAttribute()
     {
         return 'PT. ' . $this->CompanyName;
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'CustomerID');
     }
 }

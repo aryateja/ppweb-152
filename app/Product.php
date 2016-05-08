@@ -20,6 +20,21 @@ class Product extends Model
         'Discontinued'
     ];
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'CategoryID');
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'SupplierID');
+    }
+
+    public function ordered_on()
+    {
+        return $this->belongsToMany(Order::class);
+    }
+
     public function getUnitPriceFormattedAttribute()
     {
         return number_format($this->UnitPrice, 2, ',', '.');
@@ -59,20 +74,5 @@ class Product extends Model
             return 'OUT OF ORDER';
         else
             return 'CONTINUE';
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class, 'CategoryID');
-    }
-
-    public function supplier()
-    {
-        return $this->belongsTo(Supplier::class, 'SupplierID');
-    }
-
-    public function ordered_on()
-    {
-        return $this->belongsToMany(Order::class);
     }
 }

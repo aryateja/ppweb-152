@@ -22,13 +22,13 @@ class Supplier extends Model
         'HomePage'
     ];
 
-    public function getCompanyNameFormattedAttribute()
-    {
-        return 'PT. ' . $this->CompanyName;
-    }
-
     public function suppliers()
     {
         return $this->hasMany(Supplier::class, 'SupplierID');
+    }
+
+    public function getCompanyNameFormattedAttribute()
+    {
+        return 'PT. ' . $this->CompanyName;
     }
 }
