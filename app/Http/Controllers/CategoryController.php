@@ -18,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('CategoryName', 'asc')
+        $categories = DB::table('categories')->orderBy('CategoryName', 'asc')->get();
                                 ->paginate(env('PAGINATE'));
 
         return view('kategori.index', compact('categories'));
@@ -51,8 +51,6 @@ class CategoryController extends Controller
             if ($validator->fails()) {
                 return redirect('category/create')->withErrors($validator)->withInput();
             }
-
-            Category::create($request->all());
 
             return redirect('category')->with('pesan_sukses', 'Data kategori baru berhasil disimpan.');
         } 
