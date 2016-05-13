@@ -127,7 +127,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         try {
-            Category::where('CategoryID', '=', $id)->delete();
+            Category::where('CategoryID', $id)->delete();
 
             return redirect('category')->with('pesan_sukses', 'Data kategori berhasil dihapus.');
         }
